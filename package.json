@@ -1,0 +1,92 @@
+{
+  "name": "@usevibejs/auth",
+  "version": "0.1.0",
+  "description": "Authentication, Native to Vibe.js. A reactive Better Auth integration.",
+  "homepage": "https://github.com/vibejs/vibeauth#readme",
+  "bugs": {
+    "url": "https://github.com/vibejs/vibeauth/issues"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vibejs/vibeauth.git"
+  },
+  "files": [
+    "dist",
+    "LICENSE",
+    "THIRD-PARTY-NOTICES.md"
+  ],
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./server": {
+      "types": "./dist/server.d.ts",
+      "default": "./dist/server.js"
+    },
+    "./router": {
+      "types": "./dist/router.d.ts",
+      "default": "./dist/router.js"
+    }
+  },
+  "scripts": {
+    "build": "tsdown",
+    "typecheck": "tsc --noEmit",
+    "lint": "oxlint --deny-warnings",
+    "fmt": "oxfmt",
+    "test": "vitest run --project node --project dom",
+    "test:coverage": "vitest run --coverage --project node --project dom --project browser",
+    "test:browser": "vitest run --project browser",
+    "test:integration": "vitest run --project integration",
+    "check": "oxfmt --check && pnpm typecheck && pnpm lint && pnpm test:coverage",
+    "pack-check": "node scripts/pack-check.ts",
+    "docs:build": "vitepress build docs",
+    "examples:build": "pnpm --filter './examples/*' build",
+    "examples:check": "pnpm --filter './examples/*' typecheck"
+  },
+  "devDependencies": {
+    "@better-auth/passkey": "catalog:",
+    "@changesets/cli": "catalog:",
+    "@types/node": "catalog:",
+    "@usevibejs/compiler": "catalog:",
+    "@usevibejs/contract": "catalog:",
+    "@usevibejs/language-tools": "catalog:",
+    "@usevibejs/server": "catalog:",
+    "@usevibejs/ui": "catalog:",
+    "@vitest/browser-playwright": "catalog:",
+    "@vitest/coverage-v8": "catalog:",
+    "auth": "catalog:",
+    "better-auth": "catalog:",
+    "jsdom": "catalog:",
+    "oxfmt": "catalog:",
+    "oxlint": "catalog:",
+    "playwright": "catalog:",
+    "publint": "catalog:",
+    "tsdown": "catalog:",
+    "typescript": "catalog:",
+    "valibot": "catalog:",
+    "vite": "catalog:",
+    "vitepress": "catalog:",
+    "vitest": "catalog:"
+  },
+  "peerDependencies": {
+    "@usevibejs/server": "~0.1.0",
+    "@usevibejs/ui": "~0.1.0",
+    "better-auth": "~1.7.13"
+  },
+  "peerDependenciesMeta": {
+    "@usevibejs/server": {
+      "optional": true
+    },
+    "@usevibejs/ui": {
+      "optional": true
+    }
+  },
+  "engines": {
+    "node": "^24.15.0 || >=26"
+  },
+  "packageManager": "pnpm@11.18.0"
+}

@@ -1,0 +1,16 @@
+node_modules/
+dist/
+coverage/
+*.tgz
+*.tsbuildinfo
+.env
+.env.*
+!.env.example
+*.sqlite*
+*.db*
+.vite/
+.vibejs/
+docs/.vitepress/cache/
+docs/.vitepress/dist/
+test-results/
+playwright-report/
