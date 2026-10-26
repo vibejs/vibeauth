@@ -7,7 +7,8 @@ reactivity, dependency injection, router guards and typed business APIs. Better 
 passwords, cookies, sessions, OAuth and authentication plugins. VibeAuth does not create
 another authentication engine.
 
-This is an independent MIT-licensed repository. Nothing has been published or deployed.
+This is an independent MIT-licensed repository. The npm package has not been published,
+and no service has been deployed.
 The tested baseline is Better Auth **1.7.13**, Vibe.js **0.1.0**, and Node **24.22.1**.
 There is no claim of an independent security audit.
 

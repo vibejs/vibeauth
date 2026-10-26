@@ -155,11 +155,16 @@ See [verification and limits](docs/verification.md) for the maintained verificat
 
 | Commit    | Change                                                              |
 | --------- | ------------------------------------------------------------------- |
-| `2866588` | Native server and reactive client foundation                        |
-| `03fcb4e` | Typed Vibe.js router compatibility                                  |
-| `a23d144` | Verified advanced authentication, real examples and package tooling |
-| `e3cd450` | Local merge of verified implementation into `main`                  |
+| `462ca7f` | Native server and reactive client foundation                        |
+| `304105a` | Typed Vibe.js router compatibility                                  |
+| `3932917` | Verified advanced authentication, real examples and package tooling |
+| `d2139cc` | Local merge of verified implementation into `main`                  |
 
 Documentation and this report are committed separately and merged into local `main`; use
-`git log --oneline` for their final hashes. No package was published, no commits were pushed,
-no remote repository or service was created, and no production authentication system changed.
+`git log --oneline` for their final hashes. Unpublished commit email metadata was converted
+to the account's GitHub noreply address before publication to preserve email privacy;
+commit subjects, bodies, names, dates and implementation trees were preserved.
+
+The initial local verification performed no remote operations. The separately authorized
+GitHub publication targets [vibejs/vibeauth](https://github.com/vibejs/vibeauth). No npm package
+publication, service deployment or production authentication change is included.
