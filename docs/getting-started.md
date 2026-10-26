@@ -1,12 +1,11 @@
 # Installation and quick start
 
 Use Node `^24.15.0 || >=26` and pnpm 11.18.0. Match the Vibe.js runtime/compiler at 0.1.0.
-Better Auth 1.7.13 is the tested stable release. VibeAuth is currently an unpublished local
-package. After building, `pnpm pack` creates `usevibejs-auth-0.1.0.tgz`; install that tarball
-in your application with Better Auth and the Vibe.js peer for the entry you use.
+Better Auth 1.7.13 is the tested stable release. Install VibeAuth with Better Auth and the
+Vibe.js peer for the entry you use.
 
 ```sh
-pnpm add ./usevibejs-auth-0.1.0.tgz better-auth@1.7.13 @usevibejs/ui@0.1.0
+pnpm add @usevibejs/auth better-auth@1.7.13 @usevibejs/ui@0.1.0
 # Server applications also install @usevibejs/server@0.1.0.
 ```
 
@@ -42,10 +41,9 @@ resolves. [Client guide](client).
 
 ## Run the basic example
 
-Build the sibling VibeForm and VibeQuery packages, then from this repository:
+From this repository:
 
 ```sh
-node scripts/bootstrap.ts
 pnpm install
 pnpm build
 pnpm examples:build

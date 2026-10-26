@@ -7,7 +7,7 @@ Start with [installation](getting-started), then choose the [client](client), [s
 or [router](router) integration. The basic example covers the complete email/password
 lifecycle. The SaaS example adds organizations, resource policies, MFA and passkeys.
 
-The repository is local and unpublished. Tested versions and limitations are explicit in
+Tested versions and limitations are explicit in
 [verification](verification). API stability follows the pinned Vibe.js 0.1 and Better Auth
 1.7.13 compatibility baseline. No independent security audit has been performed.
 

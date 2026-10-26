@@ -14,6 +14,7 @@ docs/.vitepress/cache/
 docs/.vitepress/dist/
 test-results/
 playwright-report/
-.local-packs/
 .local/
 .vitest/
+.tsbuild/
+.pnpm-store/

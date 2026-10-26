@@ -3,8 +3,7 @@
 `pnpm verify` runs the complete local gate: build, formatting, strict types, oxlint, 100%
 per-file runtime coverage, Chromium, compiled component integration, real browser end-to-end
 flows, example template checks/builds/startup, docs build and packed consumer verification.
-Bootstrap the local optional form/query tarballs before installing dependencies. Install
-Chromium with `pnpm exec playwright install chromium` when the browser is unavailable.
+Install Chromium with `pnpm exec playwright install chromium` when the browser is unavailable.
 
 | Command                 | Scope                                                                                  |
 | ----------------------- | -------------------------------------------------------------------------------------- |

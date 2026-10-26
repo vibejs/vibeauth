@@ -9,7 +9,7 @@ independent security audit, successful external provider authentication, or a de
 
 Better Auth **1.7.13**, with matching official passkey and Drizzle adapter packages, is the
 verified baseline. It was selected from the stable npm release channel; the 1.8 beta was
-excluded. The peer range is `~1.7.13`. Vibe.js peers use `~0.1.0`.
+excluded. The peer range is `~1.7.13`. Vibe.js peers use `^0.1.0`.
 
 ## 2. Architecture
 
@@ -145,7 +145,6 @@ Changesets, dependency license inventory and third-party notices are included.
 - External email/OTP/SMS delivery, physical authenticators and Safari/Firefox/mobile WebAuthn are untested.
 - Network PostgreSQL, MySQL, Prisma and Workers/D1 were not exercised.
 - SSR/hydration, general Admin UI and team administration UI are not advertised.
-- Optional form/query development builds currently require the provided sibling repositories and bootstrap script.
 - Revocation cannot undo already authorized in-flight writes; transaction-bound authorization remains application-owned.
 - This library has not received an independent security audit.
 
@@ -161,7 +160,7 @@ See [verification and limits](docs/verification.md) for the maintained verificat
 | `d2139cc` | Local merge of verified implementation into `main`                  |
 
 Documentation and this report are committed separately and merged into local `main`; use
-`git log --oneline` for their final hashes. Unpublished commit email metadata was converted
+`git log --oneline` for their final hashes. Pre-publication commit email metadata was converted
 to the account's GitHub noreply address before publication to preserve email privacy;
 commit subjects, bodies, names, dates and implementation trees were preserved.
 
