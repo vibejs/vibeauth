@@ -1,0 +1,1696 @@
+{
+  "MIT": [
+    {
+      "name": "@asamuzakjp/css-color",
+      "versions": ["7.1.9"]
+    },
+    {
+      "name": "@asamuzakjp/dom-selector",
+      "versions": ["10.0.5"]
+    },
+    {
+      "name": "@babel/code-frame",
+      "versions": ["7.29.7"]
+    },
+    {
+      "name": "@babel/compat-data",
+      "versions": ["7.29.7"]
+    },
+    {
+      "name": "@babel/core",
+      "versions": ["7.29.7"]
+    },
+    {
+      "name": "@babel/generator",
+      "versions": ["7.29.8"]
+    },
+    {
+      "name": "@babel/helper-annotate-as-pure",
+      "versions": ["7.29.7"]
+    },
+    {
+      "name": "@babel/helper-compilation-targets",
+      "versions": ["7.29.7"]
+    },
+    {
+      "name": "@babel/helper-create-class-features-plugin",
+      "versions": ["7.29.7"]
+    },
+    {
+      "name": "@babel/helper-globals",
+      "versions": ["7.29.7"]
+    },
+    {
+      "name": "@babel/helper-member-expression-to-functions",
+      "versions": ["7.29.7"]
+    },
+    {
+      "name": "@babel/helper-module-imports",
+      "versions": ["7.29.7"]
+    },
+    {
+      "name": "@babel/helper-module-transforms",
+      "versions": ["7.29.7"]
+    },
+    {
+      "name": "@babel/helper-optimise-call-expression",
+      "versions": ["7.29.7"]
+    },
+    {
+      "name": "@babel/helper-plugin-utils",
+      "versions": ["7.29.7"]
+    },
+    {
+      "name": "@babel/helper-replace-supers",
+      "versions": ["7.29.7"]
+    },
+    {
+      "name": "@babel/helper-skip-transparent-expression-wrappers",
+      "versions": ["7.29.7"]
+    },
+    {
+      "name": "@babel/helper-string-parser",
+      "versions": ["7.29.11"]
+    },
+    {
+      "name": "@babel/helper-validator-identifier",
+      "versions": ["7.29.7"]
+    },
+    {
+      "name": "@babel/helper-validator-option",
+      "versions": ["7.29.7"]
+    },
+    {
+      "name": "@babel/helpers",
+      "versions": ["7.29.10"]
+    },
+    {
+      "name": "@babel/parser",
+      "versions": ["7.29.11"]
+    },
+    {
+      "name": "@babel/plugin-syntax-jsx",
+      "versions": ["7.29.7"]
+    },
+    {
+      "name": "@babel/plugin-syntax-typescript",
+      "versions": ["7.29.7"]
+    },
+    {
+      "name": "@babel/plugin-transform-modules-commonjs",
+      "versions": ["7.29.7"]
+    },
+    {
+      "name": "@babel/plugin-transform-react-display-name",
+      "versions": ["7.29.7"]
+    },
+    {
+      "name": "@babel/plugin-transform-react-jsx",
+      "versions": ["7.29.7"]
+    },
+    {
+      "name": "@babel/plugin-transform-react-jsx-development",
+      "versions": ["7.29.7"]
+    },
+    {
+      "name": "@babel/plugin-transform-react-pure-annotations",
+      "versions": ["7.29.7"]
+    },
+    {
+      "name": "@babel/plugin-transform-typescript",
+      "versions": ["7.29.9"]
+    },
+    {
+      "name": "@babel/preset-react",
+      "versions": ["7.29.7"]
+    },
+    {
+      "name": "@babel/preset-typescript",
+      "versions": ["7.29.7"]
+    },
+    {
+      "name": "@babel/template",
+      "versions": ["7.29.7"]
+    },
+    {
+      "name": "@babel/traverse",
+      "versions": ["7.29.10"]
+    },
+    {
+      "name": "@babel/types",
+      "versions": ["7.29.11"]
+    },
+    {
+      "name": "@bcoe/v8-coverage",
+      "versions": ["1.0.2"]
+    },
+    {
+      "name": "@better-auth/core",
+      "versions": ["1.7.13"]
+    },
+    {
+      "name": "@better-auth/drizzle-adapter",
+      "versions": ["1.7.13"]
+    },
+    {
+      "name": "@better-auth/kysely-adapter",
+      "versions": ["1.7.13"]
+    },
+    {
+      "name": "@better-auth/memory-adapter",
+      "versions": ["1.7.13"]
+    },
+    {
+      "name": "@better-auth/mongo-adapter",
+      "versions": ["1.7.13"]
+    },
+    {
+      "name": "@better-auth/passkey",
+      "versions": ["1.7.13"]
+    },
+    {
+      "name": "@better-auth/prisma-adapter",
+      "versions": ["1.7.13"]
+    },
+    {
+      "name": "@better-auth/telemetry",
+      "versions": ["1.7.13"]
+    },
+    {
+      "name": "@better-auth/utils",
+      "versions": ["0.5.1"]
+    },
+    {
+      "name": "@better-fetch/fetch",
+      "versions": ["1.3.3"]
+    },
+    {
+      "name": "@blazediff/core",
+      "versions": ["1.10.0"]
+    },
+    {
+      "name": "@bramus/specificity",
+      "versions": ["2.4.3"]
+    },
+    {
+      "name": "@changesets/apply-release-plan",
+      "versions": ["8.1.1"]
+    },
+    {
+      "name": "@changesets/assemble-release-plan",
+      "versions": ["7.0.0"]
+    },
+    {
+      "name": "@changesets/changelog-git",
+      "versions": ["1.0.0"]
+    },
+    {
+      "name": "@changesets/cli",
+      "versions": ["3.0.3"]
+    },
+    {
+      "name": "@changesets/config",
+      "versions": ["4.0.1"]
+    },
+    {
+      "name": "@changesets/errors",
+      "versions": ["1.0.0"]
+    },
+    {
+      "name": "@changesets/format",
+      "versions": ["0.1.3"]
+    },
+    {
+      "name": "@changesets/get-dependents-graph",
+      "versions": ["3.0.0"]
+    },
+    {
+      "name": "@changesets/git",
+      "versions": ["4.0.1"]
+    },
+    {
+      "name": "@changesets/parse",
+      "versions": ["1.0.0"]
+    },
+    {
+      "name": "@changesets/pre",
+      "versions": ["3.0.0"]
+    },
+    {
+      "name": "@changesets/read",
+      "versions": ["1.0.1"]
+    },
+    {
+      "name": "@changesets/should-skip-package",
+      "versions": ["1.0.0"]
+    },
+    {
+      "name": "@changesets/types",
+      "versions": ["7.0.0"]
+    },
+    {
+      "name": "@changesets/write",
+      "versions": ["1.0.1"]
+    },
+    {
+      "name": "@clack/core",
+      "versions": ["1.5.1"]
+    },
+    {
+      "name": "@clack/prompts",
+      "versions": ["1.8.1"]
+    },
+    {
+      "name": "@csstools/css-calc",
+      "versions": ["3.4.3"]
+    },
+    {
+      "name": "@csstools/css-color-parser",
+      "versions": ["4.2.6"]
+    },
+    {
+      "name": "@csstools/css-parser-algorithms",
+      "versions": ["4.0.2"]
+    },
+    {
+      "name": "@csstools/css-tokenizer",
+      "versions": ["4.0.2"]
+    },
+    {
+      "name": "@docsearch/css",
+      "versions": ["4.7.1"]
+    },
+    {
+      "name": "@docsearch/js",
+      "versions": ["4.7.1"]
+    },
+    {
+      "name": "@docsearch/sidepanel-js",
+      "versions": ["4.7.1"]
+    },
+    {
+      "name": "@esbuild-kit/core-utils",
+      "versions": ["3.3.2"]
+    },
+    {
+      "name": "@esbuild-kit/esm-loader",
+      "versions": ["2.6.5"]
+    },
+    {
+      "name": "@esbuild/darwin-arm64",
+      "versions": ["0.25.12", "0.28.2"]
+    },
+    {
+      "name": "@exodus/bytes",
+      "versions": ["1.16.0"]
+    },
+    {
+      "name": "@hexagon/base64",
+      "versions": ["1.1.28"]
+    },
+    {
+      "name": "@iconify/types",
+      "versions": ["2.0.0"]
+    },
+    {
+      "name": "@jridgewell/gen-mapping",
+      "versions": ["0.3.13"]
+    },
+    {
+      "name": "@jridgewell/remapping",
+      "versions": ["2.3.5"]
+    },
+    {
+      "name": "@jridgewell/resolve-uri",
+      "versions": ["3.1.2"]
+    },
+    {
+      "name": "@jridgewell/sourcemap-codec",
+      "versions": ["1.6.0"]
+    },
+    {
+      "name": "@jridgewell/trace-mapping",
+      "versions": ["0.3.31"]
+    },
+    {
+      "name": "@levischuck/tiny-cbor",
+      "versions": ["0.2.11"]
+    },
+    {
+      "name": "@manypkg/find-root",
+      "versions": ["3.1.0"]
+    },
+    {
+      "name": "@manypkg/get-packages",
+      "versions": ["3.1.0"]
+    },
+    {
+      "name": "@manypkg/tools",
+      "versions": ["2.1.2"]
+    },
+    {
+      "name": "@mrleebo/prisma-ast",
+      "versions": ["0.16.0"]
+    },
+    {
+      "name": "@noble/ciphers",
+      "versions": ["2.4.0"]
+    },
+    {
+      "name": "@noble/hashes",
+      "versions": ["2.4.0"]
+    },
+    {
+      "name": "@oxc-parser/binding-darwin-arm64",
+      "versions": ["0.154.0"]
+    },
+    {
+      "name": "@oxc-project/types",
+      "versions": ["0.154.0", "0.155.0"]
+    },
+    {
+      "name": "@oxfmt/binding-darwin-arm64",
+      "versions": ["0.73.0"]
+    },
+    {
+      "name": "@oxlint/binding-darwin-arm64",
+      "versions": ["1.88.0"]
+    },
+    {
+      "name": "@peculiar/asn1-android",
+      "versions": ["2.11.0"]
+    },
+    {
+      "name": "@peculiar/asn1-cms",
+      "versions": ["2.11.0"]
+    },
+    {
+      "name": "@peculiar/asn1-csr",
+      "versions": ["2.11.0"]
+    },
+    {
+      "name": "@peculiar/asn1-ecc",
+      "versions": ["2.11.0"]
+    },
+    {
+      "name": "@peculiar/asn1-pfx",
+      "versions": ["2.11.0"]
+    },
+    {
+      "name": "@peculiar/asn1-pkcs8",
+      "versions": ["2.11.0"]
+    },
+    {
+      "name": "@peculiar/asn1-pkcs9",
+      "versions": ["2.11.0"]
+    },
+    {
+      "name": "@peculiar/asn1-rsa",
+      "versions": ["2.11.0"]
+    },
+    {
+      "name": "@peculiar/asn1-schema",
+      "versions": ["2.11.0"]
+    },
+    {
+      "name": "@peculiar/asn1-x509",
+      "versions": ["2.11.0"]
+    },
+    {
+      "name": "@peculiar/asn1-x509-attr",
+      "versions": ["2.11.0"]
+    },
+    {
+      "name": "@peculiar/utils",
+      "versions": ["2.0.3"]
+    },
+    {
+      "name": "@peculiar/x509",
+      "versions": ["1.14.3"]
+    },
+    {
+      "name": "@pnpm/deps.graph-sequencer",
+      "versions": ["1100.0.1"]
+    },
+    {
+      "name": "@polka/url",
+      "versions": ["1.0.0-next.29"]
+    },
+    {
+      "name": "@publint/pack",
+      "versions": ["0.1.7"]
+    },
+    {
+      "name": "@quansync/fs",
+      "versions": ["1.1.0"]
+    },
+    {
+      "name": "@rolldown/binding-darwin-arm64",
+      "versions": ["1.2.15"]
+    },
+    {
+      "name": "@rolldown/pluginutils",
+      "versions": ["1.0.1"]
+    },
+    {
+      "name": "@shikijs/core",
+      "versions": ["4.5.0"]
+    },
+    {
+      "name": "@shikijs/engine-javascript",
+      "versions": ["4.5.0"]
+    },
+    {
+      "name": "@shikijs/engine-oniguruma",
+      "versions": ["4.5.0"]
+    },
+    {
+      "name": "@shikijs/langs",
+      "versions": ["4.5.0"]
+    },
+    {
+      "name": "@shikijs/primitive",
+      "versions": ["4.5.0"]
+    },
+    {
+      "name": "@shikijs/themes",
+      "versions": ["4.5.0"]
+    },
+    {
+      "name": "@shikijs/transformers",
+      "versions": ["4.5.0"]
+    },
+    {
+      "name": "@shikijs/types",
+      "versions": ["4.5.0"]
+    },
+    {
+      "name": "@shikijs/vscode-textmate",
+      "versions": ["10.1.0"]
+    },
+    {
+      "name": "@simplewebauthn/browser",
+      "versions": ["13.3.0"]
+    },
+    {
+      "name": "@simplewebauthn/server",
+      "versions": ["13.3.3"]
+    },
+    {
+      "name": "@standard-schema/spec",
+      "versions": ["1.1.0"]
+    },
+    {
+      "name": "@tailwindcss/node",
+      "versions": ["4.3.3"]
+    },
+    {
+      "name": "@tailwindcss/oxide",
+      "versions": ["4.3.3"]
+    },
+    {
+      "name": "@tailwindcss/oxide-darwin-arm64",
+      "versions": ["4.3.3"]
+    },
+    {
+      "name": "@tailwindcss/vite",
+      "versions": ["4.3.3"]
+    },
+    {
+      "name": "@tanstack/devtools-event-client",
+      "versions": ["0.4.4"]
+    },
+    {
+      "name": "@tanstack/form-core",
+      "versions": ["1.33.5"]
+    },
+    {
+      "name": "@tanstack/pacer-lite",
+      "versions": ["0.1.1"]
+    },
+    {
+      "name": "@tanstack/query-core",
+      "versions": ["5.104.5"]
+    },
+    {
+      "name": "@tanstack/store",
+      "versions": ["0.11.2"]
+    },
+    {
+      "name": "@types/chai",
+      "versions": ["5.2.3"]
+    },
+    {
+      "name": "@types/deep-eql",
+      "versions": ["4.0.2"]
+    },
+    {
+      "name": "@types/estree",
+      "versions": ["1.0.9"]
+    },
+    {
+      "name": "@types/hast",
+      "versions": ["3.0.5"]
+    },
+    {
+      "name": "@types/linkify-it",
+      "versions": ["5.0.0"]
+    },
+    {
+      "name": "@types/markdown-it",
+      "versions": ["14.2.0"]
+    },
+    {
+      "name": "@types/mdast",
+      "versions": ["4.0.4"]
+    },
+    {
+      "name": "@types/mdurl",
+      "versions": ["2.0.0"]
+    },
+    {
+      "name": "@types/node",
+      "versions": ["24.19.2"]
+    },
+    {
+      "name": "@types/unist",
+      "versions": ["3.0.3"]
+    },
+    {
+      "name": "@types/web-bluetooth",
+      "versions": ["0.0.21"]
+    },
+    {
+      "name": "@usevibejs/compiler",
+      "versions": ["0.1.0"]
+    },
+    {
+      "name": "@usevibejs/contract",
+      "versions": ["0.1.0"]
+    },
+    {
+      "name": "@usevibejs/errors",
+      "versions": ["0.1.0"]
+    },
+    {
+      "name": "@usevibejs/form",
+      "versions": ["0.1.0"]
+    },
+    {
+      "name": "@usevibejs/language-tools",
+      "versions": ["0.1.0"]
+    },
+    {
+      "name": "@usevibejs/query",
+      "versions": ["0.1.0"]
+    },
+    {
+      "name": "@usevibejs/server",
+      "versions": ["0.1.0"]
+    },
+    {
+      "name": "@usevibejs/ui",
+      "versions": ["0.1.0"]
+    },
+    {
+      "name": "@vitejs/plugin-vue",
+      "versions": ["6.0.10"]
+    },
+    {
+      "name": "@vitest/browser",
+      "versions": ["5.0.5"]
+    },
+    {
+      "name": "@vitest/browser-playwright",
+      "versions": ["5.0.5"]
+    },
+    {
+      "name": "@vitest/coverage-v8",
+      "versions": ["5.0.5"]
+    },
+    {
+      "name": "@vitest/istanbul-lib-coverage",
+      "versions": ["1.0.2"]
+    },
+    {
+      "name": "@vitest/istanbul-lib-report",
+      "versions": ["1.0.2"]
+    },
+    {
+      "name": "@vitest/mocker",
+      "versions": ["5.0.5"]
+    },
+    {
+      "name": "@vitest/pretty-format",
+      "versions": ["5.0.5"]
+    },
+    {
+      "name": "@vitest/spy",
+      "versions": ["5.0.5"]
+    },
+    {
+      "name": "@vitest/ui",
+      "versions": ["5.0.5"]
+    },
+    {
+      "name": "@vitest/utils",
+      "versions": ["5.0.5"]
+    },
+    {
+      "name": "@vue/compiler-core",
+      "versions": ["3.5.44"]
+    },
+    {
+      "name": "@vue/compiler-dom",
+      "versions": ["3.5.44"]
+    },
+    {
+      "name": "@vue/compiler-sfc",
+      "versions": ["3.5.44"]
+    },
+    {
+      "name": "@vue/compiler-ssr",
+      "versions": ["3.5.44"]
+    },
+    {
+      "name": "@vue/devtools-api",
+      "versions": ["8.2.1"]
+    },
+    {
+      "name": "@vue/devtools-kit",
+      "versions": ["8.2.1"]
+    },
+    {
+      "name": "@vue/devtools-shared",
+      "versions": ["8.2.1"]
+    },
+    {
+      "name": "@vue/reactivity",
+      "versions": ["3.5.44"]
+    },
+    {
+      "name": "@vue/runtime-core",
+      "versions": ["3.5.44"]
+    },
+    {
+      "name": "@vue/runtime-dom",
+      "versions": ["3.5.44"]
+    },
+    {
+      "name": "@vue/server-renderer",
+      "versions": ["3.5.44"]
+    },
+    {
+      "name": "@vue/shared",
+      "versions": ["3.5.44"]
+    },
+    {
+      "name": "@vueuse/core",
+      "versions": ["14.4.0"]
+    },
+    {
+      "name": "@vueuse/integrations",
+      "versions": ["14.4.0"]
+    },
+    {
+      "name": "@vueuse/metadata",
+      "versions": ["14.4.0"]
+    },
+    {
+      "name": "@vueuse/shared",
+      "versions": ["14.4.0"]
+    },
+    {
+      "name": "@yuku-core/binding-darwin-arm64",
+      "versions": ["0.19.0"]
+    },
+    {
+      "name": "@yuku-toolchain/types",
+      "versions": ["0.19.0"]
+    },
+    {
+      "name": "assertion-error",
+      "versions": ["2.0.1"]
+    },
+    {
+      "name": "ast-v8-to-istanbul",
+      "versions": ["1.0.7"]
+    },
+    {
+      "name": "auth",
+      "versions": ["1.7.13"]
+    },
+    {
+      "name": "better-auth",
+      "versions": ["1.7.13"]
+    },
+    {
+      "name": "better-call",
+      "versions": ["1.4.4"]
+    },
+    {
+      "name": "bidi-js",
+      "versions": ["1.1.0"]
+    },
+    {
+      "name": "birpc",
+      "versions": ["2.9.0"]
+    },
+    {
+      "name": "browserslist",
+      "versions": ["4.29.4"]
+    },
+    {
+      "name": "buffer-from",
+      "versions": ["1.1.2"]
+    },
+    {
+      "name": "bundle-name",
+      "versions": ["4.1.1"]
+    },
+    {
+      "name": "c12",
+      "versions": ["4.0.0-rc.3"]
+    },
+    {
+      "name": "cac",
+      "versions": ["7.1.0"]
+    },
+    {
+      "name": "ccount",
+      "versions": ["2.0.1"]
+    },
+    {
+      "name": "chai",
+      "versions": ["6.3.0"]
+    },
+    {
+      "name": "chalk",
+      "versions": ["5.6.2"]
+    },
+    {
+      "name": "character-entities-html4",
+      "versions": ["2.1.0"]
+    },
+    {
+      "name": "character-entities-legacy",
+      "versions": ["3.0.0"]
+    },
+    {
+      "name": "clsx",
+      "versions": ["2.1.1"]
+    },
+    {
+      "name": "comma-separated-tokens",
+      "versions": ["2.0.3"]
+    },
+    {
+      "name": "commander",
+      "versions": ["15.0.0"]
+    },
+    {
+      "name": "confbox",
+      "versions": ["0.3.1"]
+    },
+    {
+      "name": "convert-source-map",
+      "versions": ["2.0.0"]
+    },
+    {
+      "name": "css-tree",
+      "versions": ["3.2.1"]
+    },
+    {
+      "name": "cssesc",
+      "versions": ["3.0.0"]
+    },
+    {
+      "name": "csstype",
+      "versions": ["3.2.3"]
+    },
+    {
+      "name": "data-urls",
+      "versions": ["8.0.0"]
+    },
+    {
+      "name": "debug",
+      "versions": ["4.4.3"]
+    },
+    {
+      "name": "decimal.js",
+      "versions": ["10.6.0"]
+    },
+    {
+      "name": "default-browser",
+      "versions": ["5.5.1"]
+    },
+    {
+      "name": "default-browser-id",
+      "versions": ["5.0.1"]
+    },
+    {
+      "name": "define-lazy-prop",
+      "versions": ["3.0.0"]
+    },
+    {
+      "name": "defu",
+      "versions": ["6.1.7"]
+    },
+    {
+      "name": "dequal",
+      "versions": ["2.0.3"]
+    },
+    {
+      "name": "destr",
+      "versions": ["2.0.5"]
+    },
+    {
+      "name": "devlop",
+      "versions": ["1.1.0"]
+    },
+    {
+      "name": "drizzle-kit",
+      "versions": ["0.31.9"]
+    },
+    {
+      "name": "dts-resolver",
+      "versions": ["3.0.0"]
+    },
+    {
+      "name": "empathic",
+      "versions": ["2.1.0"]
+    },
+    {
+      "name": "enhanced-resolve",
+      "versions": ["5.26.0"]
+    },
+    {
+      "name": "es-module-lexer",
+      "versions": ["2.3.2"]
+    },
+    {
+      "name": "esbuild",
+      "versions": ["0.25.12", "0.28.2"]
+    },
+    {
+      "name": "esbuild-register",
+      "versions": ["3.6.0"]
+    },
+    {
+      "name": "escalade",
+      "versions": ["3.2.0"]
+    },
+    {
+      "name": "estree-walker",
+      "versions": ["2.0.2", "3.0.3"]
+    },
+    {
+      "name": "exsolve",
+      "versions": ["1.1.3"]
+    },
+    {
+      "name": "fast-string-truncated-width",
+      "versions": ["3.0.3"]
+    },
+    {
+      "name": "fast-string-width",
+      "versions": ["3.0.2"]
+    },
+    {
+      "name": "fast-wrap-ansi",
+      "versions": ["0.2.2"]
+    },
+    {
+      "name": "fdir",
+      "versions": ["6.5.0"]
+    },
+    {
+      "name": "fflate",
+      "versions": ["0.8.3"]
+    },
+    {
+      "name": "focus-trap",
+      "versions": ["8.2.3"]
+    },
+    {
+      "name": "fsevents",
+      "versions": ["2.3.3"]
+    },
+    {
+      "name": "gensync",
+      "versions": ["1.0.0-beta.2"]
+    },
+    {
+      "name": "get-tsconfig",
+      "versions": ["4.14.3", "5.0.0-beta.6"]
+    },
+    {
+      "name": "hast-util-to-html",
+      "versions": ["9.0.5"]
+    },
+    {
+      "name": "hast-util-whitespace",
+      "versions": ["3.0.0"]
+    },
+    {
+      "name": "hookable",
+      "versions": ["5.5.3", "6.1.2"]
+    },
+    {
+      "name": "html-encoding-sniffer",
+      "versions": ["7.0.0"]
+    },
+    {
+      "name": "html-void-elements",
+      "versions": ["3.0.0"]
+    },
+    {
+      "name": "human-id",
+      "versions": ["4.2.2"]
+    },
+    {
+      "name": "import-meta-resolve",
+      "versions": ["4.2.0"]
+    },
+    {
+      "name": "import-without-cache",
+      "versions": ["0.4.1"]
+    },
+    {
+      "name": "is-docker",
+      "versions": ["3.0.0"]
+    },
+    {
+      "name": "is-in-ssh",
+      "versions": ["1.0.0"]
+    },
+    {
+      "name": "is-inside-container",
+      "versions": ["1.0.0"]
+    },
+    {
+      "name": "is-potential-custom-element-name",
+      "versions": ["1.0.1"]
+    },
+    {
+      "name": "is-wsl",
+      "versions": ["3.1.1"]
+    },
+    {
+      "name": "jiti",
+      "versions": ["2.7.0"]
+    },
+    {
+      "name": "jju",
+      "versions": ["1.4.0"]
+    },
+    {
+      "name": "jose",
+      "versions": ["6.2.13"]
+    },
+    {
+      "name": "js-tokens",
+      "versions": ["4.0.0", "10.0.0"]
+    },
+    {
+      "name": "jsdom",
+      "versions": ["30.1.3"]
+    },
+    {
+      "name": "jsesc",
+      "versions": ["3.1.0"]
+    },
+    {
+      "name": "json5",
+      "versions": ["2.2.3"]
+    },
+    {
+      "name": "jsonc-parser",
+      "versions": ["3.3.1"]
+    },
+    {
+      "name": "kleur",
+      "versions": ["3.0.3"]
+    },
+    {
+      "name": "kysely",
+      "versions": ["0.29.7"]
+    },
+    {
+      "name": "launch-editor",
+      "versions": ["2.14.2"]
+    },
+    {
+      "name": "lilconfig",
+      "versions": ["2.1.0"]
+    },
+    {
+      "name": "magic-string",
+      "versions": ["0.30.21", "1.4.3"]
+    },
+    {
+      "name": "magicast",
+      "versions": ["0.5.5"]
+    },
+    {
+      "name": "mark.js",
+      "versions": ["8.11.1"]
+    },
+    {
+      "name": "mdast-util-to-hast",
+      "versions": ["13.2.1"]
+    },
+    {
+      "name": "micromark-util-character",
+      "versions": ["2.1.1"]
+    },
+    {
+      "name": "micromark-util-encode",
+      "versions": ["2.0.1"]
+    },
+    {
+      "name": "micromark-util-sanitize-uri",
+      "versions": ["2.0.1"]
+    },
+    {
+      "name": "micromark-util-symbol",
+      "versions": ["2.0.1"]
+    },
+    {
+      "name": "micromark-util-types",
+      "versions": ["2.0.3"]
+    },
+    {
+      "name": "minisearch",
+      "versions": ["7.2.0"]
+    },
+    {
+      "name": "mri",
+      "versions": ["1.2.0"]
+    },
+    {
+      "name": "mrmime",
+      "versions": ["2.0.1"]
+    },
+    {
+      "name": "ms",
+      "versions": ["2.1.3"]
+    },
+    {
+      "name": "nanoid",
+      "versions": ["3.3.20"]
+    },
+    {
+      "name": "nanostores",
+      "versions": ["1.5.5"]
+    },
+    {
+      "name": "node-releases",
+      "versions": ["2.0.60"]
+    },
+    {
+      "name": "obug",
+      "versions": ["3.0.0"]
+    },
+    {
+      "name": "oniguruma-parser",
+      "versions": ["0.12.2"]
+    },
+    {
+      "name": "oniguruma-to-es",
+      "versions": ["4.3.6"]
+    },
+    {
+      "name": "open",
+      "versions": ["11.0.4"]
+    },
+    {
+      "name": "oxc-parser",
+      "versions": ["0.154.0"]
+    },
+    {
+      "name": "oxfmt",
+      "versions": ["0.73.0"]
+    },
+    {
+      "name": "oxlint",
+      "versions": ["1.88.0"]
+    },
+    {
+      "name": "package-manager-detector",
+      "versions": ["1.9.0"]
+    },
+    {
+      "name": "parse5",
+      "versions": ["8.0.1"]
+    },
+    {
+      "name": "pathe",
+      "versions": ["2.0.3"]
+    },
+    {
+      "name": "perfect-debounce",
+      "versions": ["2.1.0"]
+    },
+    {
+      "name": "picomatch",
+      "versions": ["4.0.7"]
+    },
+    {
+      "name": "pkg-types",
+      "versions": ["2.4.0"]
+    },
+    {
+      "name": "pngjs",
+      "versions": ["7.0.0"]
+    },
+    {
+      "name": "postcss",
+      "versions": ["8.5.31"]
+    },
+    {
+      "name": "postcss-selector-parser",
+      "versions": ["7.1.7"]
+    },
+    {
+      "name": "powershell-utils",
+      "versions": ["0.2.1"]
+    },
+    {
+      "name": "prettier",
+      "versions": ["3.9.10"]
+    },
+    {
+      "name": "prompts",
+      "versions": ["2.4.2"]
+    },
+    {
+      "name": "property-information",
+      "versions": ["7.2.0"]
+    },
+    {
+      "name": "publint",
+      "versions": ["0.3.25"]
+    },
+    {
+      "name": "punycode",
+      "versions": ["2.3.1"]
+    },
+    {
+      "name": "pvtsutils",
+      "versions": ["1.3.6"]
+    },
+    {
+      "name": "pvutils",
+      "versions": ["1.2.0"]
+    },
+    {
+      "name": "quansync",
+      "versions": ["1.0.0"]
+    },
+    {
+      "name": "rc9",
+      "versions": ["3.1.0"]
+    },
+    {
+      "name": "regex",
+      "versions": ["6.1.0"]
+    },
+    {
+      "name": "regex-recursion",
+      "versions": ["6.0.2"]
+    },
+    {
+      "name": "regex-utilities",
+      "versions": ["2.3.0"]
+    },
+    {
+      "name": "require-from-string",
+      "versions": ["2.0.2"]
+    },
+    {
+      "name": "resolve-pkg-maps",
+      "versions": ["1.0.0"]
+    },
+    {
+      "name": "rolldown",
+      "versions": ["1.2.15"]
+    },
+    {
+      "name": "rolldown-plugin-dts",
+      "versions": ["0.28.8"]
+    },
+    {
+      "name": "rou3",
+      "versions": ["0.9.2"]
+    },
+    {
+      "name": "run-applescript",
+      "versions": ["7.1.0"]
+    },
+    {
+      "name": "sade",
+      "versions": ["1.8.1"]
+    },
+    {
+      "name": "set-cookie-parser",
+      "versions": ["3.2.1"]
+    },
+    {
+      "name": "shell-quote",
+      "versions": ["1.12.0"]
+    },
+    {
+      "name": "shiki",
+      "versions": ["4.5.0"]
+    },
+    {
+      "name": "sirv",
+      "versions": ["3.0.2"]
+    },
+    {
+      "name": "sisteransi",
+      "versions": ["1.0.5"]
+    },
+    {
+      "name": "source-map-support",
+      "versions": ["0.5.21"]
+    },
+    {
+      "name": "space-separated-tokens",
+      "versions": ["2.0.2"]
+    },
+    {
+      "name": "srvx",
+      "versions": ["1.0.7"]
+    },
+    {
+      "name": "std-env",
+      "versions": ["4.3.0"]
+    },
+    {
+      "name": "stringify-entities",
+      "versions": ["4.0.4"]
+    },
+    {
+      "name": "tabbable",
+      "versions": ["6.5.1"]
+    },
+    {
+      "name": "tailwind-merge",
+      "versions": ["3.7.0"]
+    },
+    {
+      "name": "tailwindcss",
+      "versions": ["4.3.3"]
+    },
+    {
+      "name": "tapable",
+      "versions": ["2.3.3"]
+    },
+    {
+      "name": "tinybench",
+      "versions": ["6.2.2"]
+    },
+    {
+      "name": "tinyexec",
+      "versions": ["1.3.1"]
+    },
+    {
+      "name": "tinyglobby",
+      "versions": ["0.2.17"]
+    },
+    {
+      "name": "tinypool",
+      "versions": ["2.2.0"]
+    },
+    {
+      "name": "tinyrainbow",
+      "versions": ["3.2.0"]
+    },
+    {
+      "name": "tldts",
+      "versions": ["7.4.19"]
+    },
+    {
+      "name": "tldts-core",
+      "versions": ["7.4.19"]
+    },
+    {
+      "name": "totalist",
+      "versions": ["3.0.1"]
+    },
+    {
+      "name": "tr46",
+      "versions": ["7.0.0"]
+    },
+    {
+      "name": "tree-kill",
+      "versions": ["1.2.2"]
+    },
+    {
+      "name": "trim-lines",
+      "versions": ["3.0.1"]
+    },
+    {
+      "name": "tsdown",
+      "versions": ["0.23.1"]
+    },
+    {
+      "name": "tsyringe",
+      "versions": ["4.10.0"]
+    },
+    {
+      "name": "unconfig-core",
+      "versions": ["7.5.0"]
+    },
+    {
+      "name": "undici",
+      "versions": ["8.12.3"]
+    },
+    {
+      "name": "undici-types",
+      "versions": ["7.24.6"]
+    },
+    {
+      "name": "unist-util-is",
+      "versions": ["6.0.1"]
+    },
+    {
+      "name": "unist-util-position",
+      "versions": ["5.0.0"]
+    },
+    {
+      "name": "unist-util-stringify-position",
+      "versions": ["4.0.0"]
+    },
+    {
+      "name": "unist-util-visit",
+      "versions": ["5.2.0"]
+    },
+    {
+      "name": "unist-util-visit-parents",
+      "versions": ["6.1.0"]
+    },
+    {
+      "name": "update-browserslist-db",
+      "versions": ["1.3.4"]
+    },
+    {
+      "name": "util-deprecate",
+      "versions": ["1.0.2"]
+    },
+    {
+      "name": "valibot",
+      "versions": ["1.5.0"]
+    },
+    {
+      "name": "verkit",
+      "versions": ["0.5.0"]
+    },
+    {
+      "name": "vfile",
+      "versions": ["6.0.3"]
+    },
+    {
+      "name": "vfile-message",
+      "versions": ["4.0.3"]
+    },
+    {
+      "name": "vite",
+      "versions": ["8.3.4"]
+    },
+    {
+      "name": "vitepress",
+      "versions": ["2.0.0-alpha.20"]
+    },
+    {
+      "name": "vitest",
+      "versions": ["5.0.5"]
+    },
+    {
+      "name": "vscode-jsonrpc",
+      "versions": ["9.0.3"]
+    },
+    {
+      "name": "vue",
+      "versions": ["3.5.44"]
+    },
+    {
+      "name": "w3c-xmlserializer",
+      "versions": ["6.0.0"]
+    },
+    {
+      "name": "whatwg-mimetype",
+      "versions": ["5.0.0"]
+    },
+    {
+      "name": "whatwg-url",
+      "versions": ["17.3.0"]
+    },
+    {
+      "name": "why-is-node-running",
+      "versions": ["3.2.1"]
+    },
+    {
+      "name": "ws",
+      "versions": ["8.22.0"]
+    },
+    {
+      "name": "wsl-utils",
+      "versions": ["1.0.1"]
+    },
+    {
+      "name": "xmlchars",
+      "versions": ["2.2.0"]
+    },
+    {
+      "name": "yocto-spinner",
+      "versions": ["1.2.2"]
+    },
+    {
+      "name": "yoctocolors",
+      "versions": ["2.2.0"]
+    },
+    {
+      "name": "yuku-ast",
+      "versions": ["0.19.0"]
+    },
+    {
+      "name": "yuku-codegen",
+      "versions": ["0.19.0"]
+    },
+    {
+      "name": "yuku-core",
+      "versions": ["0.19.0"]
+    },
+    {
+      "name": "yuku-parser",
+      "versions": ["0.19.0"]
+    },
+    {
+      "name": "zod",
+      "versions": ["4.6.7"]
+    },
+    {
+      "name": "zwitch",
+      "versions": ["2.0.4"]
+    }
+  ],
+  "Apache-2.0": [
+    {
+      "name": "@chevrotain/cst-dts-gen",
+      "versions": ["12.0.0"]
+    },
+    {
+      "name": "@chevrotain/gast",
+      "versions": ["12.0.0"]
+    },
+    {
+      "name": "@chevrotain/regexp-to-ast",
+      "versions": ["12.0.0"]
+    },
+    {
+      "name": "@chevrotain/types",
+      "versions": ["12.0.0"]
+    },
+    {
+      "name": "@chevrotain/utils",
+      "versions": ["12.0.0"]
+    },
+    {
+      "name": "@drizzle-team/brocli",
+      "versions": ["0.10.2"]
+    },
+    {
+      "name": "@electric-sql/pglite",
+      "versions": ["0.5.11"]
+    },
+    {
+      "name": "@typescript/typescript-darwin-arm64",
+      "versions": ["7.0.2", "7.1.0-dev.20261015.1"]
+    },
+    {
+      "name": "baseline-browser-mapping",
+      "versions": ["2.11.32"]
+    },
+    {
+      "name": "chevrotain",
+      "versions": ["12.0.0"]
+    },
+    {
+      "name": "detect-libc",
+      "versions": ["2.1.2"]
+    },
+    {
+      "name": "drizzle-orm",
+      "versions": ["0.45.4"]
+    },
+    {
+      "name": "expect-type",
+      "versions": ["1.4.0"]
+    },
+    {
+      "name": "playwright",
+      "versions": ["1.64.1"]
+    },
+    {
+      "name": "playwright-core",
+      "versions": ["1.64.1"]
+    },
+    {
+      "name": "reflect-metadata",
+      "versions": ["0.2.2"]
+    },
+    {
+      "name": "typescript",
+      "versions": ["7.0.2", "7.1.0-dev.20261015.1"]
+    },
+    {
+      "name": "xml-name-validator",
+      "versions": ["5.0.0"]
+    }
+  ],
+  "MIT-0": [
+    {
+      "name": "@csstools/color-helpers",
+      "versions": ["6.1.2"]
+    },
+    {
+      "name": "@csstools/css-syntax-patches-for-csstree",
+      "versions": ["1.1.15"]
+    }
+  ],
+  "CC0-1.0": [
+    {
+      "name": "@iconify-json/simple-icons",
+      "versions": ["1.2.100"]
+    },
+    {
+      "name": "mdn-data",
+      "versions": ["2.27.1"]
+    }
+  ],
+  "ISC": [
+    {
+      "name": "@ungap/structured-clone",
+      "versions": ["1.4.0"]
+    },
+    {
+      "name": "electron-to-chromium",
+      "versions": ["1.5.464"]
+    },
+    {
+      "name": "flatted",
+      "versions": ["3.4.4"]
+    },
+    {
+      "name": "graceful-fs",
+      "versions": ["4.2.11"]
+    },
+    {
+      "name": "lru-cache",
+      "versions": ["5.1.1"]
+    },
+    {
+      "name": "picocolors",
+      "versions": ["1.1.1"]
+    },
+    {
+      "name": "saxes",
+      "versions": ["6.0.0"]
+    },
+    {
+      "name": "semver",
+      "versions": ["6.3.1", "7.8.5"]
+    },
+    {
+      "name": "yallist",
+      "versions": ["3.1.1"]
+    },
+    {
+      "name": "yaml",
+      "versions": ["2.9.1"]
+    }
+  ],
+  "BSD-3-Clause": [
+    {
+      "name": "asn1js",
+      "versions": ["3.1.0"]
+    },
+    {
+      "name": "source-map",
+      "versions": ["0.6.1"]
+    },
+    {
+      "name": "source-map-js",
+      "versions": ["1.2.2"]
+    },
+    {
+      "name": "tough-cookie",
+      "versions": ["6.0.2"]
+    }
+  ],
+  "CC-BY-4.0": [
+    {
+      "name": "caniuse-lite",
+      "versions": ["1.0.30001819"]
+    }
+  ],
+  "BSD-2-Clause": [
+    {
+      "name": "dotenv",
+      "versions": ["17.4.2"]
+    },
+    {
+      "name": "entities",
+      "versions": ["7.0.1", "8.1.0"]
+    },
+    {
+      "name": "webidl-conversions",
+      "versions": ["8.0.1"]
+    }
+  ],
+  "MPL-2.0": [
+    {
+      "name": "lightningcss",
+      "versions": ["1.32.0", "1.33.0"]
+    },
+    {
+      "name": "lightningcss-darwin-arm64",
+      "versions": ["1.32.0", "1.33.0"]
+    }
+  ],
+  "BlueOak-1.0.0": [
+    {
+      "name": "lru-cache",
+      "versions": ["11.5.3"]
+    }
+  ],
+  "0BSD": [
+    {
+      "name": "tslib",
+      "versions": ["1.14.1", "2.8.1"]
+    }
+  ]
+}

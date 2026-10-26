@@ -1,0 +1,45 @@
+name: Verify
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    defaults:
+      run:
+        working-directory: vibeauth
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: vibeauth
+      - uses: actions/checkout@v4
+        with:
+          repository: vibejs/vibeform
+          ref: 27f8d12bb1f83b510413d5a87055e7ab8ebedc90
+          path: vibeform
+      - uses: actions/checkout@v4
+        with:
+          repository: vibejs/vibequery
+          ref: 8ccbee9841c9d76e2fc57e2a4d4d570da4e5ceec
+          path: vibequery
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11.18.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Build unpublished optional ecosystem adapters
+        run: |
+          pnpm --config.manage-package-manager-versions=false --dir ../vibeform install --frozen-lockfile
+          pnpm --config.manage-package-manager-versions=false --dir ../vibeform build
+          pnpm --config.manage-package-manager-versions=false --dir ../vibequery install --frozen-lockfile
+          pnpm --config.manage-package-manager-versions=false --dir ../vibequery build
+          node scripts/bootstrap.ts
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm exec playwright install --with-deps chromium
+      - run: pnpm verify
+      - run: pnpm audit --prod
