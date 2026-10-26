@@ -53,9 +53,9 @@ minimumReleaseAgeExclude:
   - '@better-auth/telemetry@1.7.13'
   - auth@1.7.13
   - better-auth@1.7.13
+  - '@usevibejs/form@0.1.0'
+  - '@usevibejs/query@0.1.0'
 overrides:
   '@esbuild-kit/core-utils>esbuild': 0.28.2
-  '@usevibejs/form': file:.local-packs/usevibejs-form-0.1.0.tgz
-  '@usevibejs/query': file:.local-packs/usevibejs-query-0.1.0.tgz
 allowBuilds:
   esbuild: true

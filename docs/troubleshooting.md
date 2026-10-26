@@ -51,6 +51,6 @@ failure. Virtual Chromium verification does not establish every platform's behav
 
 ## Optional dependencies cannot be installed
 
-Build the sibling VibeForm/VibeQuery repositories and run `node scripts/bootstrap.ts`, then
-`pnpm install`. Local tarballs are development-only. Do not publish a manifest with local
-file/link specs. Core package consumers do not need those optional libraries.
+Run `pnpm install` again; the examples install `@usevibejs/form` and `@usevibejs/query` from npm.
+Do not publish a manifest with local file/link specs. Core package consumers do not need those
+optional libraries.

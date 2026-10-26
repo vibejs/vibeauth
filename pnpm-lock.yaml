@@ -33,7 +33,13 @@ catalogs:
     '@usevibejs/contract':
       specifier: 0.1.0
       version: 0.1.0
+    '@usevibejs/form':
+      specifier: 0.1.0
+      version: 0.1.0
     '@usevibejs/language-tools':
+      specifier: 0.1.0
+      version: 0.1.0
+    '@usevibejs/query':
       specifier: 0.1.0
       version: 0.1.0
     '@usevibejs/server':
@@ -115,8 +121,6 @@ catalogs:
 
 overrides:
   '@esbuild-kit/core-utils>esbuild': 0.28.2
-  '@usevibejs/form': file:.local-packs/usevibejs-form-0.1.0.tgz
-  '@usevibejs/query': file:.local-packs/usevibejs-query-0.1.0.tgz
 
 importers:
 
@@ -150,14 +154,14 @@ importers:
         specifier: 'catalog:'
         version: 0.1.0
       '@usevibejs/form':
-        specifier: file:.local-packs/usevibejs-form-0.1.0.tgz
-        version: file:.local-packs/usevibejs-form-0.1.0.tgz(@usevibejs/ui@0.1.0(vitest@5.0.5))
+        specifier: 'catalog:'
+        version: 0.1.0(@usevibejs/ui@0.1.0(vitest@5.0.5))
       '@usevibejs/language-tools':
         specifier: 'catalog:'
         version: 0.1.0(@usevibejs/ui@0.1.0(vitest@5.0.5))(vite@8.3.4(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))
       '@usevibejs/query':
-        specifier: file:.local-packs/usevibejs-query-0.1.0.tgz
-        version: file:.local-packs/usevibejs-query-0.1.0.tgz(@usevibejs/contract@0.1.0)(@usevibejs/ui@0.1.0(vitest@5.0.5))
+        specifier: 'catalog:'
+        version: 0.1.0(@usevibejs/contract@0.1.0)(@usevibejs/ui@0.1.0(vitest@5.0.5))
       '@usevibejs/server':
         specifier: 'catalog:'
         version: 0.1.0
@@ -240,11 +244,11 @@ importers:
         specifier: 'catalog:'
         version: 0.1.0
       '@usevibejs/form':
-        specifier: file:../../.local-packs/usevibejs-form-0.1.0.tgz
-        version: file:.local-packs/usevibejs-form-0.1.0.tgz(@usevibejs/ui@0.1.0(vitest@5.0.5))
+        specifier: 'catalog:'
+        version: 0.1.0(@usevibejs/ui@0.1.0(vitest@5.0.5))
       '@usevibejs/query':
-        specifier: file:../../.local-packs/usevibejs-query-0.1.0.tgz
-        version: file:.local-packs/usevibejs-query-0.1.0.tgz(@usevibejs/contract@0.1.0)(@usevibejs/ui@0.1.0(vitest@5.0.5))
+        specifier: 'catalog:'
+        version: 0.1.0(@usevibejs/contract@0.1.0)(@usevibejs/ui@0.1.0(vitest@5.0.5))
       '@usevibejs/server':
         specifier: 'catalog:'
         version: 0.1.0
@@ -295,11 +299,11 @@ importers:
         specifier: 'catalog:'
         version: 0.1.0
       '@usevibejs/form':
-        specifier: file:../../.local-packs/usevibejs-form-0.1.0.tgz
-        version: file:.local-packs/usevibejs-form-0.1.0.tgz(@usevibejs/ui@0.1.0(vitest@5.0.5))
+        specifier: 'catalog:'
+        version: 0.1.0(@usevibejs/ui@0.1.0(vitest@5.0.5))
       '@usevibejs/query':
-        specifier: file:../../.local-packs/usevibejs-query-0.1.0.tgz
-        version: file:.local-packs/usevibejs-query-0.1.0.tgz(@usevibejs/contract@0.1.0)(@usevibejs/ui@0.1.0(vitest@5.0.5))
+        specifier: 'catalog:'
+        version: 0.1.0(@usevibejs/contract@0.1.0)(@usevibejs/ui@0.1.0(vitest@5.0.5))
       '@usevibejs/server':
         specifier: 'catalog:'
         version: 0.1.0
@@ -2031,9 +2035,8 @@ packages:
     resolution: {integrity: sha512-GZyeZCRMBNPvcVAEZAUHU0ft4vVlWXgrVNdecloCYs1IIUPC4kQXGimiOzi2dHvytyjBAw4QcOIMmnUI2tLRoA==}
     engines: {node: ^24.15.0 || >=26}
 
-  '@usevibejs/form@file:.local-packs/usevibejs-form-0.1.0.tgz':
-    resolution: {integrity: sha512-rgt4z9gOv3B7wDZVyhKwqKjPcklM1R6+CzJcQOXc7peMr2nOHqCgIUkdbqoAzpi5VkCvWxv6jNYPPTpHLvfXcg==, tarball: file:.local-packs/usevibejs-form-0.1.0.tgz}
-    version: 0.1.0
+  '@usevibejs/form@0.1.0':
+    resolution: {integrity: sha512-dm5unLRMGMRqedVeopHSYVZUPkYJY2H1dVSxR0DeGx4JK/tUuWKYC704hYdPVC4E2vfcnnLGubuF+lVyzKqhCg==}
     engines: {node: ^24.15.0 || >=26}
     peerDependencies:
       '@usevibejs/ui': ^0.1.0
@@ -2044,9 +2047,8 @@ packages:
     peerDependencies:
       '@usevibejs/ui': 0.1.0
 
-  '@usevibejs/query@file:.local-packs/usevibejs-query-0.1.0.tgz':
-    resolution: {integrity: sha512-D9gnDRGQ0BixsPm6nBwzr+GKjhD7sJS10Ht1EyS19LL48K3XuAF2xgAZzPIJvXtPgk5hF036+gV+NcK+V8Knew==, tarball: file:.local-packs/usevibejs-query-0.1.0.tgz}
-    version: 0.1.0
+  '@usevibejs/query@0.1.0':
+    resolution: {integrity: sha512-rEEZ2W/fM/TnLlfXeAqUuFtEqsP5ekvlsA/dOrY7G27R7msm943YIkmiydnPfTR0LwcwL08Zo9v8loAoiRza6g==}
     engines: {node: ^24.15.0 || >=26}
     peerDependencies:
       '@usevibejs/contract': ^0.1.0
@@ -4970,7 +4972,7 @@ snapshots:
 
   '@usevibejs/errors@0.1.0': {}
 
-  '@usevibejs/form@file:.local-packs/usevibejs-form-0.1.0.tgz(@usevibejs/ui@0.1.0(vitest@5.0.5))':
+  '@usevibejs/form@0.1.0(@usevibejs/ui@0.1.0(vitest@5.0.5))':
     dependencies:
       '@tanstack/form-core': 1.33.5
       '@tanstack/store': 0.11.2
@@ -4985,7 +4987,7 @@ snapshots:
     transitivePeerDependencies:
       - vite
 
-  '@usevibejs/query@file:.local-packs/usevibejs-query-0.1.0.tgz(@usevibejs/contract@0.1.0)(@usevibejs/ui@0.1.0(vitest@5.0.5))':
+  '@usevibejs/query@0.1.0(@usevibejs/contract@0.1.0)(@usevibejs/ui@0.1.0(vitest@5.0.5))':
     dependencies:
       '@tanstack/query-core': 5.104.5
       '@usevibejs/ui': 0.1.0(vitest@5.0.5)

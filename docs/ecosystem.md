@@ -1,8 +1,8 @@
 # Optional VibeForm and VibeQuery integration
 
 The auth runtime depends on neither package. The examples use their verified public 0.1.0 APIs.
-Until the optional packages are published, the development workspace bootstraps local tarballs
-from the built sibling repositories. This never affects the published auth manifest.
+The examples install `@usevibejs/form` and `@usevibejs/query` 0.1.0 from npm as development
+dependencies. They never enter the published auth manifest.
 
 ## VibeForm
 

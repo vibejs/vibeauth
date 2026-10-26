@@ -68,11 +68,7 @@ The [delivery report](DELIVERY.md) records the implemented scope, measured check
 
 ## Local development
 
-The optional form/query examples use local 0.1.0 tarballs because VibeForm and VibeQuery are not
-in the npm registry yet. With the sibling `vibeform` and `vibequery` repositories built, run:
-
 ```sh
-node scripts/bootstrap.ts
 pnpm install
 pnpm build
 pnpm check
@@ -84,9 +80,7 @@ pnpm docs:build
 pnpm pack-check
 ```
 
-`bootstrap` packs existing local builds; it does not clone, publish or edit their source.
-The resulting development tarballs are ignored by Git and never enter the auth package.
-`pnpm verify` runs the full sequence after bootstrap.
+`pnpm verify` runs the full sequence.
 
 ## Releases
 

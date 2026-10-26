@@ -39,7 +39,6 @@ Node-only server typing and browser dependency graph are checked.
 - Auth compositions are editable repository source, not new Vibecn CLI registry entries.
 - Revocation cannot undo already authorized in-flight writes; transaction-bound policies are application-owned.
 - Coverage measures this adapter's executed paths, not an independent security audit or proof of upstream cryptography.
-- Optional form/query development tarballs require the provided sibling repositories until those integrations are published.
 
 No package publication, push, remote repository creation, deployment or production authentication
 change is performed by the local verification workflow.
