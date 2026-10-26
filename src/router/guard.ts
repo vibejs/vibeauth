@@ -1,4 +1,4 @@
-import type { NavigationGuard, RouteLocation, RouteRecordRaw } from "@usevibejs/ui/router";
+import type { RouteLocation, RouteRecordRaw } from "@usevibejs/ui/router";
 import type { AuthState } from "../client/client.ts";
 import type { SessionData } from "../shared/types.ts";
 import { safeReturnURL } from "./redirect.ts";
@@ -32,7 +32,10 @@ export interface AuthRouteGuardOptions<S extends SessionData> {
 /** Register with router.beforeEach. Meta is checked across parents so children cannot weaken it. */
 export function createAuthRouteGuard<S extends SessionData>(
   options: AuthRouteGuardOptions<S>,
-): NavigationGuard<readonly RouteRecordRaw[]> {
+): (
+  to: RouteLocation<readonly RouteRecordRaw[]>,
+  from: RouteLocation<readonly RouteRecordRaw[]>,
+) => Promise<void | false | { path: string; replace: boolean; query?: { returnTo: string } }> {
   const { auth } = options;
   const login = safeReturnURL(options.login ?? "/login");
   const home = safeReturnURL(options.home ?? "/");
