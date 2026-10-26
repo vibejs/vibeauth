@@ -1,6 +1,6 @@
 # Typed business contracts
 
-Keep Better Auth's dynamic endpoints under its own handler. Vibe.js contracts describe your
+Keep Better Auth's dynamic endpoints under its own handler. vibe.js contracts describe your
 application endpoints, with the same error codes enforced by server guards.
 
 ```ts

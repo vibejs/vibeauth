@@ -1,7 +1,7 @@
 import { defineConfig } from 'vitepress';
 export default defineConfig({
   title: 'VibeAuth',
-  description: 'Authentication, Native to Vibe.js',
+  description: 'Authentication, Native to vibe.js',
   cleanUrls: true,
   lastUpdated: true,
   themeConfig: {
@@ -72,8 +72,8 @@ export default defineConfig({
     ],
     socialLinks: [{ icon: 'github', link: 'https://github.com/vibejs/vibeauth' }],
     footer: {
-      message: 'MIT licensed. Better Auth owns authentication; VibeAuth connects it to Vibe.js.',
-      copyright: 'Vibe.js contributors',
+      message: 'MIT licensed. Better Auth owns authentication; VibeAuth connects it to vibe.js.',
+      copyright: 'vibe.js contributors',
     },
   },
 });

@@ -1,6 +1,6 @@
 # VibeAuth delivery report
 
-Local package: `@usevibejs/auth@0.1.0`. License: MIT. Tagline: **Authentication, Native to Vibe.js**.
+Local package: `@usevibejs/auth@0.1.0`. License: MIT. Tagline: **Authentication, Native to vibe.js**.
 
 This report records implemented behavior and local verification. It does not claim an
 independent security audit, successful external provider authentication, or a deployed service.
@@ -9,7 +9,7 @@ independent security audit, successful external provider authentication, or a de
 
 Better Auth **1.7.13**, with matching official passkey and Drizzle adapter packages, is the
 verified baseline. It was selected from the stable npm release channel; the 1.8 beta was
-excluded. The peer range is `~1.7.13`. Vibe.js peers use `^0.1.0`.
+excluded. The peer range is `~1.7.13`. vibe.js peers use `^0.1.0`.
 
 ## 2. Architecture
 
@@ -45,7 +45,7 @@ The middleware mounts the original Better Auth handler at the exact configured a
 (default `/api/auth`) and its slash-delimited descendants. It forwards the original Request
 and returns the original Response, preserving bodies, streams, redirects, query parameters,
 cookies and multiple `Set-Cookie` headers. Actual `VibeFactory` application `fetch` tests cover
-mounting, ordering and unrelated routes with the Vibe.js `/api` controller prefix.
+mounting, ordering and unrelated routes with the vibe.js `/api` controller prefix.
 
 Request identity is validated through Better Auth, deduplicated only within the same request
 context and auth source, and stripped of raw session tokens. Cookie-cache bypass preserves
@@ -53,7 +53,7 @@ revocation checks; read-only business lookups leave renewal to the official sess
 
 ## 6. Client reactivity
 
-The client bridges the public vanilla session atom into Vibe.js `shallowRef`, `computed`,
+The client bridges the public vanilla session atom into vibe.js `shallowRef`, `computed`,
 `watch` and effect scopes. One reference-counted subscription serves each client instance.
 Application installation, subtree overrides and scope disposal use public provide/inject
 APIs. Loading, authenticated, unauthenticated, refreshing, error and expired states are
@@ -135,7 +135,7 @@ Coverage and dependency audits are not independent security certification.
 The package builds ESM declarations and source maps with tsdown. Strict publint, packed
 manifest/file checks, an outside-workspace installation, all-entry ESM imports, custom-field
 and plugin type inference, and server-only Node typing pass. The independent consumer browser
-graph contains **57 modules and one Vibe.js runtime**, with no server/database drivers,
+graph contains **57 modules and one vibe.js runtime**, with no server/database drivers,
 React/Vue modules or injected secret value. No local development paths enter the packed manifest.
 Changesets, dependency license inventory and third-party notices are included.
 
@@ -155,7 +155,7 @@ See [verification and limits](docs/verification.md) for the maintained verificat
 | Commit    | Change                                                              |
 | --------- | ------------------------------------------------------------------- |
 | `462ca7f` | Native server and reactive client foundation                        |
-| `304105a` | Typed Vibe.js router compatibility                                  |
+| `304105a` | Typed vibe.js router compatibility                                  |
 | `3932917` | Verified advanced authentication, real examples and package tooling |
 | `d2139cc` | Local merge of verified implementation into `main`                  |
 

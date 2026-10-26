@@ -15,7 +15,7 @@ The Input copy adds native minimum/maximum length and pattern props for authenti
 | Organization switcher, settings, invitations and members | `examples/saas/ui/Organizations.vibe`                                                                         |
 
 Copy a composition and its primitive imports into your application, preserve the license, and
-adapt it to your routes/client instance. Compile with the matching Vibe.js compiler. Reuse
+adapt it to your routes/client instance. Compile with the matching vibe.js compiler. Reuse
 Vibecn's theme rather than introducing another token system. Examples support light/dark mode,
 small screens, associated labels, autocomplete, explicit submit types, status/error messages,
 focus states and disabled submission.

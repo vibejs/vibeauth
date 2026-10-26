@@ -8,15 +8,15 @@ Update only after running the complete integration suite. The installed package 
 declarations and executable source were checked, including vanilla `useSession` (a Nanostores
 atom, not a framework hook), session revision cancellation, handler and migration APIs.
 
-Vibe.js 0.1.0 has public Fetch middleware, request context, HttpError, guard factories,
+vibe.js 0.1.0 has public Fetch middleware, request context, HttpError, guard factories,
 injection tokens, effect scopes, application unmount callbacks and router guards. Its
 CONTRACTS.md and decisions 0001–0006 were reviewed. No integration code imports internal
 or tooling runtime APIs. Compiler-generated `.vibe` code uses the framework's own ABI.
-Vibe.js currently supports client rendering only; this adapter does not promise SSR.
+vibe.js currently supports client rendering only; this adapter does not promise SSR.
 
 The browser entry imports only public UI and Better Auth vanilla APIs. Server uses only
 public server APIs. Router imports UI types only and works with a structural auth state.
-Better Auth and Vibe.js are external peers. UI/server peers are optional because consumers
+Better Auth and vibe.js are external peers. UI/server peers are optional because consumers
 may use one entry independently; each chosen entry requires its corresponding peer.
 
 The request cache is weakly keyed by RequestContext and then auth instance. Reads bypass

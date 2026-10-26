@@ -2,7 +2,7 @@
 
 ## Everything under /api/auth returns 404
 
-Match Better Auth and middleware base paths. The mount is absolute; `/api` from the Vibe.js
+Match Better Auth and middleware base paths. The mount is absolute; `/api` from the vibe.js
 controller option is not prepended again. Place auth middleware before body-consuming or
 auth-required middleware. Confirm your reverse proxy forwards the original callback URL and
 all methods. Unknown Better Auth endpoint names remain Better Auth errors; do not add custom
@@ -38,7 +38,7 @@ cancels instead of looping. APIs still require their own guards.
 
 ## Browser state does not update
 
-Check that all components use the same installed client and one Vibe.js runtime. Do not
+Check that all components use the same installed client and one vibe.js runtime. Do not
 bundle a second UI copy or call a React/Vue Better Auth hook. Avoid `disableSignal` on native
 actions unless you explicitly revalidate. Plugin actions must use matching official client
 plugins. Disposed scopes must be remounted to subscribe again.

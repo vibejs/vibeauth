@@ -1,13 +1,13 @@
 # VibeAuth
 
-**Authentication, Native to Vibe.js**
+**Authentication for vibe.js, powered by Better Auth.**
 
-`@usevibejs/auth` connects Better Auth to [Vibe.js](https://vibejs.org) Fetch middleware, native
+`@usevibejs/auth` connects Better Auth to [vibe.js](https://vibejs.org) Fetch middleware, native
 fine-grained reactivity, dependency injection, router guards and typed business APIs. Better Auth
 owns passwords, cookies, sessions, OAuth and authentication plugins. VibeAuth does not create
 another authentication engine.
 
-The tested baseline is Better Auth **1.7.13**, Vibe.js **0.1.0**, and Node **24.22.1**.
+The tested baseline is Better Auth **1.7.13**, vibe.js **0.1.0**, and Node **24.22.1**.
 There is no claim of an independent security audit.
 
 ## Install
@@ -47,7 +47,7 @@ createApp(App).use(createAuthPlugin(auth)).mount('#app');
 ## Entries
 
 The three entries are isolated: `@usevibejs/auth`, `@usevibejs/auth/server`, and
-`@usevibejs/auth/router`. Vibe.js and Better Auth are external peers. Vibecn, VibeForm and
+`@usevibejs/auth/router`. vibe.js and Better Auth are external peers. Vibecn, VibeForm and
 VibeQuery are optional example integrations.
 
 ## Documentation

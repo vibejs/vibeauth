@@ -23,4 +23,4 @@ configured. Workers/D1 remain separately unverified. Production adoption needs a
 security review, monitored delivery/abuse controls, dependency advisories, and tested secrets
 rotation and backup procedures appropriate to the application.
 
-Set request/body size limits at the HTTP server or reverse proxy for the auth mount too. Vibe.js controller `bodyLimit` is applied after middleware and does not bound Better Auth handler bodies. Do not consume an auth body in a logging middleware. Redact token-bearing recovery paths and all cookie/authorization headers in proxy and debug logs.
+Set request/body size limits at the HTTP server or reverse proxy for the auth mount too. vibe.js controller `bodyLimit` is applied after middleware and does not bound Better Auth handler bodies. Do not consume an auth body in a logging middleware. Redact token-bearing recovery paths and all cookie/authorization headers in proxy and debug logs.

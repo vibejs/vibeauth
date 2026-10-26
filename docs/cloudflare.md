@@ -13,7 +13,7 @@ For an experiment, create the Better Auth instance from the Worker's environment
 set its database to the D1 binding, use an exact HTTPS external baseURL/trusted origin, and
 read the auth secret from a Worker secret binding. Cache instances only when scoped to the
 correct environment; never store request identity in module globals. Forward the original
-Request/Response through the adapter. Validate Vibe.js server runtime compatibility in workerd
+Request/Response through the adapter. Validate vibe.js server runtime compatibility in workerd
 before asserting this combination is supported.
 
 Generate the schema for the exact enabled plugins with Better Auth's supported tooling,

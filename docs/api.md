@@ -24,7 +24,7 @@ inference-preserving `useAuth()`. Operations and plugin extensions stay under `c
 
 | Export                                                   | Contract                                                                                        |
 | -------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
-| `createAuthMiddleware(auth, { basePath? }?)`             | Vibe.js Fetch middleware; absolute path, defaults to configured Better Auth path or `/api/auth` |
+| `createAuthMiddleware(auth, { basePath? }?)`             | vibe.js Fetch middleware; absolute path, defaults to configured Better Auth path or `/api/auth` |
 | `getAuthSession(auth, ctx, { fresh? }?)`                 | Request-scoped inferred safe context; optional fresh validation                                 |
 | `requireAuthSession(auth, ctx)`                          | Authenticated context or explicit 401                                                           |
 | `createAuthGuard(auth, options?)`                        | No-argument CanActivate class for UseGuards/global guards                                       |
@@ -34,7 +34,7 @@ inference-preserving `useAuth()`. Operations and plugin extensions stay under `c
 | `AuthGuardOptions`, `AuthPolicy`, `AuthenticatedContext` | Typed guard and policy contracts                                                                |
 
 Guard options: `optional?: boolean`, `verifiedEmail?: boolean`, `policy?: (identity, ctx) =>
-boolean | Promise<boolean>`. Auth failures throw Vibe.js HttpError with 401/403. Infrastructure
+boolean | Promise<boolean>`. Auth failures throw vibe.js HttpError with 401/403. Infrastructure
 errors propagate normally. No default declaration-merging side effects on RequestState.
 
 ## `@usevibejs/auth/router`
@@ -47,4 +47,4 @@ returns a validated local path or sanitized fallback.
 
 Errors prefixed `VIBEAUTH_` describe adapter configuration/lifecycle misuse: invalid/mismatched
 paths, invalid origins, missing scope or missing injection. Credential errors remain native
-Better Auth results, and protected business HTTP errors remain Vibe.js problem responses.
+Better Auth results, and protected business HTTP errors remain vibe.js problem responses.

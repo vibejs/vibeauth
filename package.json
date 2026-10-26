@@ -1,7 +1,7 @@
 {
   "name": "@usevibejs/auth",
   "version": "0.1.0",
-  "description": "Reactive Better Auth integration for Vibe.js.",
+  "description": "Authentication for vibe.js, powered by Better Auth.",
   "keywords": [
     "auth",
     "authentication",

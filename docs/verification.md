@@ -1,7 +1,7 @@
 # Verification and limits
 
 The exact tested baseline is Better Auth / official passkey / Drizzle adapter **1.7.13**,
-Vibe.js **0.1.0**, Node **24.22.1**, pnpm **11.18.0**, Vitest **5.0.5**, and Chromium supplied
+vibe.js **0.1.0**, Node **24.22.1**, pnpm **11.18.0**, Vitest **5.0.5**, and Chromium supplied
 by Playwright **1.64.1**. Better Auth 1.7.13 was the stable npm dist-tag at selection time;
 1.8 beta was excluded. Compatibility outside the declared peer ranges is not promised.
 
@@ -34,7 +34,7 @@ Node-only server typing and browser dependency graph are checked.
 - Native team creation and membership operations are server-tested; team invitation flows are not browser-tested.
 - Cloudflare Workers/D1 remain unverified; no Node result is presented as Worker validation.
 - MySQL, Prisma and external/network PostgreSQL services were not exercised.
-- Vibe.js 0.1 client rendering is supported; SSR/hydration is not advertised.
+- vibe.js 0.1 client rendering is supported; SSR/hydration is not advertised.
 - Default DI composables expose core types; instance-bound composables retain plugin/custom fields.
 - Auth compositions are editable repository source, not new Vibecn CLI registry entries.
 - Revocation cannot undo already authorized in-flight writes; transaction-bound policies are application-owned.

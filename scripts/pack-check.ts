@@ -159,7 +159,7 @@ router.beforeEach(createAuthRouteGuard({auth:adapter}));
       .filter((id) => id.includes('@usevibejs/ui/dist/'))
       .map((id) => id.split('/dist/')[0]),
   );
-  if (uiRoots.size !== 1) throw new Error(`Expected one Vibe.js runtime, found ${uiRoots.size}.`);
+  if (uiRoots.size !== 1) throw new Error(`Expected one vibe.js runtime, found ${uiRoots.size}.`);
   const javascript = (await readdir(join(directory, 'bundle'))).filter((file) =>
     file.endsWith('.js'),
   );

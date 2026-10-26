@@ -1,4 +1,4 @@
-// oxlint-disable typescript/no-extraneous-class -- Vibe.js modules are plain classes registered with Module.
+// oxlint-disable typescript/no-extraneous-class -- vibe.js modules are plain classes registered with Module.
 import { Module, VibeFactory } from '@usevibejs/server';
 import { createAuthMiddleware } from '@usevibejs/auth/server';
 import { accountController } from '../../shared/server.ts';
