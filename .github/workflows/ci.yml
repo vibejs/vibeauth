@@ -1,37 +1,42 @@
-name: Verify
+name: CI
+
 on:
   push:
   pull_request:
-  workflow_dispatch:
+
 permissions:
   contents: read
+
 jobs:
-  verify:
+  check:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     defaults:
       run:
         working-directory: vibeauth
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           path: vibeauth
-      - uses: actions/checkout@v4
+      # Temporary: @usevibejs/form and @usevibejs/query are not on npm yet. scripts/bootstrap.ts packs
+      # these pinned commits into .local-packs, and the lockfile pins those tarballs by integrity.
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           repository: vibejs/vibeform
           ref: 27f8d12bb1f83b510413d5a87055e7ab8ebedc90
           path: vibeform
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           repository: vibejs/vibequery
           ref: 8ccbee9841c9d76e2fc57e2a4d4d570da4e5ceec
           path: vibequery
-      - uses: pnpm/action-setup@v4
-        with:
-          version: 11.18.0
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version: 24
+      - uses: pnpm/setup@a0881977cd8ea73b1ed212236c99ca10dcc80cf4 # v3.1.1
+        with:
+          working-directory: vibeauth
+          install: false
       - name: Build unpublished optional ecosystem adapters
         run: |
           pnpm --config.manage-package-manager-versions=false --dir ../vibeform install --frozen-lockfile
@@ -43,3 +48,4 @@ jobs:
       - run: pnpm exec playwright install --with-deps chromium
       - run: pnpm verify
       - run: pnpm audit --prod
+      - run: git diff --exit-code

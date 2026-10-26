@@ -2032,7 +2032,7 @@ packages:
     engines: {node: ^24.15.0 || >=26}
 
   '@usevibejs/form@file:.local-packs/usevibejs-form-0.1.0.tgz':
-    resolution: {integrity: sha512-NX2BkumhEKk0OABWiKI/pgKgtZTp+agkkhiYky5ko09Ffh8Atvc9a5vlg3Iw4hPU1wtn9b8CmtGPpX7Irq93LA==, tarball: file:.local-packs/usevibejs-form-0.1.0.tgz}
+    resolution: {integrity: sha512-rgt4z9gOv3B7wDZVyhKwqKjPcklM1R6+CzJcQOXc7peMr2nOHqCgIUkdbqoAzpi5VkCvWxv6jNYPPTpHLvfXcg==, tarball: file:.local-packs/usevibejs-form-0.1.0.tgz}
     version: 0.1.0
     engines: {node: ^24.15.0 || >=26}
     peerDependencies:

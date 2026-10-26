@@ -1,7 +1,7 @@
 {
   "name": "@usevibejs/auth",
   "version": "0.1.0",
-  "description": "Authentication, Native to Vibe.js. A reactive Better Auth integration.",
+  "description": "Reactive Better Auth integration for Vibe.js.",
   "keywords": [
     "auth",
     "authentication",
@@ -21,6 +21,7 @@
   },
   "files": [
     "dist",
+    "README.md",
     "LICENSE",
     "THIRD-PARTY-NOTICES.md"
   ],
@@ -58,7 +59,8 @@
     "examples:build": "pnpm --filter './examples/*' build",
     "examples:check": "pnpm --filter './examples/*' typecheck",
     "examples:verify": "node scripts/example-check.ts",
-    "verify": "pnpm build && pnpm check && pnpm test:integration && pnpm examples:check && pnpm examples:build && pnpm examples:verify && pnpm docs:build && pnpm pack-check"
+    "verify": "pnpm build && pnpm check && pnpm test:integration && pnpm examples:check && pnpm examples:build && pnpm examples:verify && pnpm docs:build && pnpm pack-check",
+    "version-packages": "changeset version && pnpm install --lockfile-only"
   },
   "devDependencies": {
     "@better-auth/drizzle-adapter": "catalog:",
@@ -99,8 +101,8 @@
     "vitest": "catalog:"
   },
   "peerDependencies": {
-    "@usevibejs/server": "~0.1.0",
-    "@usevibejs/ui": "~0.1.0",
+    "@usevibejs/server": "^0.1.0",
+    "@usevibejs/ui": "^0.1.0",
     "better-auth": "~1.7.13"
   },
   "peerDependenciesMeta": {

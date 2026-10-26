@@ -2,18 +2,29 @@
 
 **Authentication, Native to Vibe.js**
 
-`@usevibejs/auth` connects Better Auth to Vibe.js Fetch middleware, native fine-grained
-reactivity, dependency injection, router guards and typed business APIs. Better Auth owns
-passwords, cookies, sessions, OAuth and authentication plugins. VibeAuth does not create
+`@usevibejs/auth` connects Better Auth to [Vibe.js](https://vibejs.org) Fetch middleware, native
+fine-grained reactivity, dependency injection, router guards and typed business APIs. Better Auth
+owns passwords, cookies, sessions, OAuth and authentication plugins. VibeAuth does not create
 another authentication engine.
 
-This is an independent MIT-licensed repository. The npm package has not been published,
-and no service has been deployed.
 The tested baseline is Better Auth **1.7.13**, Vibe.js **0.1.0**, and Node **24.22.1**.
 There is no claim of an independent security audit.
 
+## Install
+
+```sh
+pnpm add @usevibejs/auth better-auth
+# Server entry: pnpm add @usevibejs/server   Browser entries: pnpm add @usevibejs/ui
+```
+
+`better-auth` is a required peer. `@usevibejs/server` and `@usevibejs/ui` are optional peers for
+the entries that use them.
+
+## Quick start
+
 ```ts
 // Server: auth is your configured Better Auth instance.
+import { VibeFactory } from '@usevibejs/server';
 import { createAuthMiddleware, createAuthGuard } from '@usevibejs/auth/server';
 const Authenticated = createAuthGuard(auth);
 const app = await VibeFactory.create(AppModule, {
@@ -25,6 +36,7 @@ const app = await VibeFactory.create(AppModule, {
 
 ```ts
 // Browser
+import { createApp } from '@usevibejs/ui';
 import { createVibeAuthClient, createAuthPlugin } from '@usevibejs/auth';
 const auth = createVibeAuthClient();
 createApp(App).use(createAuthPlugin(auth)).mount('#app');
@@ -32,15 +44,32 @@ createApp(App).use(createAuthPlugin(auth)).mount('#app');
 // state.user.value / state.status.value / state.client.signIn.email(...)
 ```
 
+## Entries
+
 The three entries are isolated: `@usevibejs/auth`, `@usevibejs/auth/server`, and
 `@usevibejs/auth/router`. Vibe.js and Better Auth are external peers. Vibecn, VibeForm and
 VibeQuery are optional example integrations.
 
+## Documentation
+
+- [Getting started](docs/getting-started.md)
+- [Client and native composables](docs/client.md)
+- [Server middleware, session access and guards](docs/server.md)
+- [Router guards](docs/router.md)
+- [Authorization and tenant isolation](docs/authorization.md)
+- [Security](docs/security.md) and [threat model](docs/threat-model.md)
+- [Database migrations](docs/databases.md)
+- [Deployment](docs/deployment.md)
+- [API reference](docs/api.md)
+- [Verification](docs/verification.md)
+
+Build the searchable, responsive documentation website with `pnpm docs:build`.
+The [delivery report](DELIVERY.md) records the implemented scope, measured checks and limitations.
+
 ## Local development
 
-The optional form/query examples use local 0.1.0 tarballs because VibeQuery was not in the
-npm registry during development. With the sibling `vibeform` and `vibequery` repositories
-built, run:
+The optional form/query examples use local 0.1.0 tarballs because VibeForm and VibeQuery are not
+in the npm registry yet. With the sibling `vibeform` and `vibequery` repositories built, run:
 
 ```sh
 node scripts/bootstrap.ts
@@ -57,17 +86,27 @@ pnpm pack-check
 
 `bootstrap` packs existing local builds; it does not clone, publish or edit their source.
 The resulting development tarballs are ignored by Git and never enter the auth package.
-See [getting started](docs/getting-started.md) to run either complete example, and
-[verification](docs/verification.md) for exactly what is tested.
-The [delivery report](DELIVERY.md) records the implemented scope, measured checks and limitations.
+`pnpm verify` runs the full sequence after bootstrap.
 
-## Guides
+## Releases
 
-- [Client and native composables](docs/client.md)
-- [Server middleware, session access and guards](docs/server.md)
-- [Authorization and tenant isolation](docs/authorization.md)
-- [Security and threat model](docs/security.md)
-- [Database migrations](docs/databases.md)
-- [API reference](docs/api.md)
+Releases use changesets. Add a changeset with `pnpm changeset` for every user-visible change. A
+maintainer runs the Release workflow from main, which opens a release PR and publishes to npm
+through trusted publishing.
 
-Build the searchable, responsive documentation website with `pnpm docs:build`.
+## The vibe.js family
+
+| Package                                                   | Description                                                 |
+| --------------------------------------------------------- | ----------------------------------------------------------- |
+| [vibe.js](https://github.com/vibejs/vibejs)               | The framework: .vibe components, server and typed contracts |
+| [@usevibejs/auth](https://github.com/vibejs/vibeauth)     | Authentication with Better Auth                             |
+| [@usevibejs/form](https://github.com/vibejs/vibeform)     | Type-safe forms with TanStack Form                          |
+| [@usevibejs/motion](https://github.com/vibejs/vibemotion) | Animations, gestures and layout with Motion                 |
+| [@usevibejs/query](https://github.com/vibejs/vibequery)   | Async state and data fetching with TanStack Query           |
+| [@usevibejs/table](https://github.com/vibejs/vibetable)   | Headless tables with TanStack Table                         |
+| [@usevibejs/use](https://github.com/vibejs/vibeuse)       | Essential composables                                       |
+| [vibecn](https://github.com/vibejs/vibecn)                | shadcn/ui components as .vibe source                        |
+
+## License
+
+MIT. See [LICENSE](LICENSE) and [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md).

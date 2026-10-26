@@ -9,7 +9,7 @@ independent security audit, successful external provider authentication, or a de
 
 Better Auth **1.7.13**, with matching official passkey and Drizzle adapter packages, is the
 verified baseline. It was selected from the stable npm release channel; the 1.8 beta was
-excluded. The peer range is `~1.7.13`. Vibe.js peers use `~0.1.0`.
+excluded. The peer range is `~1.7.13`. Vibe.js peers use `^0.1.0`.
 
 ## 2. Architecture
 
