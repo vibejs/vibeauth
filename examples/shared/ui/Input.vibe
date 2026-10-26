@@ -1,0 +1,99 @@
+<!-- Adapted from shadcn/ui under MIT. See vibecn.LICENSE. -->
+<script setup lang="ts">
+import { computed, useAttrs, useTemplateRef } from '@usevibejs/ui';
+import type { ClassValue } from '@usevibejs/ui';
+import { cn } from '../lib/utils.ts';
+
+defineOptions({ inheritAttrs: false });
+
+const {
+  class: className,
+  type = 'text',
+  name,
+  placeholder,
+  disabled,
+  required,
+  readonly,
+  autocomplete,
+  minlength,
+  maxlength,
+  pattern,
+} = defineProps<{
+  class?: ClassValue;
+  type?: 'text' | 'email' | 'password' | 'search' | 'tel' | 'url';
+  name?: string;
+  placeholder?: string;
+  disabled?: boolean;
+  required?: boolean;
+  readonly?: boolean;
+  autocomplete?: string;
+  minlength?: number;
+  maxlength?: number;
+  pattern?: string;
+}>();
+const model = defineModel<string>({ default: () => '' });
+const field = useTemplateRef<HTMLInputElement>('field');
+defineExpose({ focus: () => field.value?.focus() });
+const attrs = useAttrs();
+const inputAttrs = computed(() => ({
+  ...attrs,
+  name,
+  placeholder,
+  disabled,
+  required,
+  readonly,
+  autocomplete,
+  minlength,
+  maxlength,
+  pattern,
+  class: cn(
+    'h-9 w-full min-w-0 rounded-md border border-input bg-transparent px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none selection:bg-primary selection:text-primary-foreground placeholder:text-muted-foreground disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm dark:bg-input/30 focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40',
+    className,
+  ),
+}));
+</script>
+
+<template>
+  <!-- The compiler rejects v-model with a bound :type (VIBE2507); one static input per type keeps v-model's IME handling. -->
+  <input
+    v-if="type === 'email'"
+    type="email"
+    ref="field"
+    data-slot="input"
+    v-bind="inputAttrs"
+    v-model="model"
+  />
+  <input
+    v-else-if="type === 'password'"
+    type="password"
+    ref="field"
+    data-slot="input"
+    v-bind="inputAttrs"
+    v-model="model"
+  />
+  <input
+    v-else-if="type === 'search'"
+    type="search"
+    ref="field"
+    data-slot="input"
+    v-bind="inputAttrs"
+    v-model="model"
+  />
+  <input
+    v-else-if="type === 'tel'"
+    type="tel"
+    ref="field"
+    data-slot="input"
+    v-bind="inputAttrs"
+    v-model="model"
+  />
+  <input
+    v-else-if="type === 'url'"
+    type="url"
+    ref="field"
+    data-slot="input"
+    v-bind="inputAttrs"
+    v-model="model"
+  />
+  <input v-else type="text" ref="field" data-slot="input" v-bind="inputAttrs" v-model="model" />
+</template>

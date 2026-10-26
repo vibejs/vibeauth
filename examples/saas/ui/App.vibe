@@ -1,0 +1,219 @@
+<script setup lang="ts">
+import { ref, watch } from '@usevibejs/ui';
+import { useRouter } from '@usevibejs/ui/router';
+import { useQueryClient } from '@usevibejs/query';
+import { auth as instance } from './auth.ts';
+import Credentials from '../../shared/components/Credentials.vibe';
+import Account from '../../shared/components/Account.vibe';
+import Security from './Security.vibe';
+import Organizations from './Organizations.vibe';
+import Button from '../../shared/ui/Button.vibe';
+import Input from '../../shared/ui/Input.vibe';
+import Checkbox from '../../shared/ui/Checkbox.vibe';
+const auth = instance.useAuth();
+const router = useRouter();
+const queries = useQueryClient();
+const dark = ref(matchMedia('(prefers-color-scheme: dark)').matches);
+watch(dark, (value) => document.documentElement.classList.toggle('dark', value), {
+  immediate: true,
+});
+const tab = ref<'account' | 'workspaces' | 'security'>('account');
+const mode = ref<'login' | 'signup' | 'forgot' | 'reset'>(
+  new URLSearchParams(location.search).get('view') === 'reset' ? 'reset' : 'login',
+);
+const challenge = ref(false);
+const backup = ref(false);
+const code = ref('');
+const trustDevice = ref(false);
+const busy = ref(false);
+const message = ref('');
+const providers = (import.meta.env.VITE_SOCIAL_PROVIDERS ?? '')
+  .split(',')
+  .filter((provider: string): provider is 'google' | 'github' | 'apple' =>
+    ['google', 'github', 'apple'].includes(provider),
+  );
+const supported = window.isSecureContext && 'PublicKeyCredential' in window;
+async function complete() {
+  challenge.value = false;
+  await router.replace('/app');
+}
+async function signOut() {
+  void queries.cancelQueries();
+  queries.clear();
+  await auth.client.signOut();
+  await auth.refreshSession();
+  await router.replace('/');
+}
+async function verify() {
+  busy.value = true;
+  message.value = '';
+  try {
+    const result = backup.value
+      ? await auth.client.twoFactor.verifyBackupCode({
+          code: code.value,
+          trustDevice: trustDevice.value,
+        })
+      : await auth.client.twoFactor.verifyTotp({
+          code: code.value,
+          trustDevice: trustDevice.value,
+        });
+    code.value = '';
+    if (result.error)
+      message.value = 'Unable to verify this code. Try again or use a recovery code.';
+    else {
+      await auth.refreshSession();
+      await complete();
+    }
+  } catch {
+    message.value = 'Unable to connect. Try again.';
+  } finally {
+    busy.value = false;
+  }
+}
+async function passkey() {
+  busy.value = true;
+  message.value = '';
+  try {
+    const result = await auth.client.signIn.passkey();
+    if (result.error) message.value = 'Passkey sign-in was not completed.';
+    else {
+      await auth.refreshSession();
+      await complete();
+    }
+  } catch {
+    message.value = 'Passkey sign-in is unavailable.';
+  } finally {
+    busy.value = false;
+  }
+}
+async function social(provider: 'google' | 'github' | 'apple') {
+  const result = await auth.client.signIn.social({
+    provider,
+    callbackURL: `${location.origin}/app`,
+    errorCallbackURL: `${location.origin}/?oauthError=1`,
+  });
+  if (result.error) message.value = 'Unable to start provider sign-in.';
+}
+if (new URLSearchParams(location.search).has('oauthError'))
+  message.value = 'Provider sign-in was not completed. Please try again.';
+</script>
+<template>
+  <div class="auth-shell">
+    <aside class="auth-aside">
+      <a class="brand" href="/"><span class="brand-mark" aria-hidden="true">v/a</span>VibeAuth</a>
+      <div>
+        <p class="mb-5 text-xs uppercase tracking-widest text-muted-foreground">
+          Your workspace, connected
+        </p>
+        <h1 class="aside-title">Good work<br />starts with trust.</h1>
+        <p class="mt-5 max-w-xs text-sm leading-relaxed text-muted-foreground">
+          One account for your team, your projects, and the way you work.
+        </p>
+      </div>
+      <p class="aside-footer session-line">{{ auth.status.value }}</p>
+    </aside>
+    <main class="auth-content">
+      <div class="mb-10 flex justify-end gap-2">
+        <Button variant="ghost" size="sm" @click="dark = !dark">{{
+          dark ? 'Light mode' : 'Dark mode'
+        }}</Button
+        ><Button v-if="auth.isAuthenticated.value" variant="outline" size="sm" @click="signOut"
+          >Sign out</Button
+        >
+      </div>
+      <p v-if="auth.status.value === 'error'" role="alert">
+        Unable to load your account. <a href="/">Try again</a>
+      </p>
+      <div v-else-if="auth.isAuthenticated.value">
+        <h2 class="mb-2 text-3xl font-semibold tracking-tight">
+          {{ auth.user.value?.name }}’s account
+        </h2>
+        <p class="mb-8 text-sm text-muted-foreground">Make space for your next project.</p>
+        <nav class="mb-8 flex gap-2 border-b pb-4" aria-label="Account sections">
+          <Button
+            v-for="item in ['account', 'workspaces', 'security']"
+            :key="item"
+            :variant="tab === item ? 'secondary' : 'ghost'"
+            :aria-current="tab === item ? 'page' : undefined"
+            @click="tab = item as typeof tab"
+            >{{
+              item === 'account' ? 'Account' : item === 'workspaces' ? 'Workspaces' : 'Security'
+            }}</Button
+          >
+        </nav>
+        <Account v-if="tab === 'account'" /><Organizations
+          v-else-if="tab === 'workspaces'"
+        /><Security v-else />
+      </div>
+      <div v-else-if="challenge" class="mx-auto max-w-sm">
+        <h2 class="mb-3 text-3xl font-semibold tracking-tight">One more step.</h2>
+        <p class="mb-6 text-sm text-muted-foreground">
+          {{
+            backup
+              ? 'Enter one of your single-use recovery codes.'
+              : 'Enter the code from your authenticator app.'
+          }}
+        </p>
+        <form class="grid gap-4" @submit.prevent="verify">
+          <label for="challenge-code">{{ backup ? 'Recovery code' : 'Authenticator code' }}</label
+          ><Input id="challenge-code" v-model="code" autocomplete="one-time-code" required /><label
+            class="flex items-center gap-2 text-sm"
+            ><Checkbox v-model="trustDevice" />Trust this private device</label
+          ><Button type="submit" :disabled="busy">Verify and sign in</Button>
+        </form>
+        <Button
+          variant="link"
+          @click="
+            backup = !backup;
+            code = '';
+          "
+          >{{ backup ? 'Use authenticator' : 'Use a recovery code' }}</Button
+        >
+      </div>
+      <div v-else class="mx-auto max-w-sm">
+        <h2 class="mb-3 text-3xl font-semibold tracking-tight">
+          {{
+            mode === 'signup'
+              ? 'Join your team.'
+              : mode === 'forgot'
+                ? 'Recover your account.'
+                : mode === 'reset'
+                  ? 'Choose a new password.'
+                  : 'Welcome to your workspace.'
+          }}
+        </h2>
+        <p class="mb-8 text-sm text-muted-foreground">
+          {{
+            mode === 'signup'
+              ? 'Create an account and verify your email to get started.'
+              : 'Sign in to continue.'
+          }}
+        </p>
+        <Credentials :mode="mode" @challenge="challenge = true" @complete="complete" />
+        <div v-if="mode === 'login'" class="mt-5 grid gap-3">
+          <Button
+            v-for="provider in providers"
+            :key="provider"
+            variant="outline"
+            @click="social(provider)"
+            >Continue with
+            {{
+              provider === 'github' ? 'GitHub' : provider === 'google' ? 'Google' : 'Apple'
+            }}</Button
+          ><Button variant="outline" :disabled="!supported || busy" @click="passkey"
+            >Sign in with a passkey</Button
+          >
+        </div>
+        <nav class="mt-5 flex flex-wrap gap-2" aria-label="Account access">
+          <Button variant="link" @click="mode = mode === 'login' ? 'signup' : 'login'">{{
+            mode === 'login' ? 'Create account' : 'Sign in'
+          }}</Button
+          ><Button v-if="mode === 'login'" variant="link" @click="mode = 'forgot'"
+            >Forgot password?</Button
+          >
+        </nav>
+      </div>
+      <p v-if="message" role="alert" class="mt-5 text-sm">{{ message }}</p>
+    </main>
+  </div>
+</template>

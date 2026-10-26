@@ -1,0 +1,34 @@
+<!-- Adapted from shadcn/ui under MIT. See vibecn.LICENSE. -->
+<script setup lang="ts">
+import { inject, watch } from '@usevibejs/ui';
+import type { ClassValue, Ref } from '@usevibejs/ui';
+import { cn } from '../lib/utils.ts';
+
+defineOptions({ inheritAttrs: false });
+
+const {
+  class: className,
+  src,
+  alt = '',
+} = defineProps<{ class?: ClassValue; src?: string; alt?: string }>();
+const status = inject<Ref<'loading' | 'loaded' | 'error'>>(Symbol.for('vibecn.avatar'))!;
+watch(
+  () => src,
+  (current) => (status.value = current ? 'loading' : 'error'),
+  { immediate: true },
+);
+</script>
+
+<template>
+  <img
+    v-if="src && status !== 'error'"
+    v-show="status === 'loaded'"
+    data-slot="avatar-image"
+    :src="src"
+    :alt="alt"
+    v-bind="$attrs"
+    :class="cn('aspect-square size-full', className)"
+    @load="status = 'loaded'"
+    @error="status = 'error'"
+  />
+</template>

@@ -1,0 +1,37 @@
+<!-- Adapted from shadcn/ui under MIT. See vibecn.LICENSE. -->
+<script setup lang="ts">
+import { computed } from '@usevibejs/ui';
+import type { ClassValue } from '@usevibejs/ui';
+import { cn } from '../lib/utils.ts';
+
+defineOptions({ inheritAttrs: false });
+
+const { class: className, errors = [] } = defineProps<{
+  class?: ClassValue;
+  /** Validation errors; duplicate messages are shown once. */
+  errors?: ({ message?: string } | undefined)[];
+}>();
+defineSlots<{ default?: (props: {}) => unknown }>();
+const messages = computed(() => [
+  ...new Set(
+    errors.map((error) => error?.message).filter((message): message is string => !!message),
+  ),
+]);
+</script>
+
+<template>
+  <div
+    v-if="$slots.default || messages.length"
+    role="alert"
+    data-slot="field-error"
+    v-bind="$attrs"
+    :class="cn('text-sm font-normal text-destructive', className)"
+  >
+    <slot>
+      <template v-if="messages.length === 1">{{ messages[0] }}</template>
+      <ul v-else class="ml-4 flex list-disc flex-col gap-1">
+        <li v-for="message in messages" :key="message">{{ message }}</li>
+      </ul>
+    </slot>
+  </div>
+</template>

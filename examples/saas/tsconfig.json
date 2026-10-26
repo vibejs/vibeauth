@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "target": "es2022",
+    "lib": ["es2024", "dom"],
+    "module": "preserve",
+    "moduleDetection": "force",
+    "strict": true,
+    "verbatimModuleSyntax": true,
+    "allowImportingTsExtensions": true,
+    "skipLibCheck": true,
+    "noEmit": true,
+    "types": ["vite/client"]
+  },
+  "contentMappers": [
+    {
+      "package": "@usevibejs/language-tools",
+      "extensions": [".vibe"]
+    }
+  ],
+  "include": [
+    "ui",
+    "../shared/components",
+    "../shared/ui",
+    "../shared/lib",
+    "../shared/contracts.ts"
+  ]
+}

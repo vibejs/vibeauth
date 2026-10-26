@@ -1,0 +1,41 @@
+<script setup lang="ts">
+import { ref } from '@usevibejs/ui';
+import { auth } from './auth.ts';
+import Button from '../../shared/ui/Button.vibe';
+import Input from '../../shared/ui/Input.vibe';
+const email = ref('');
+const busy = ref(false);
+const message = ref('');
+async function resend() {
+  busy.value = true;
+  try {
+    await auth.client.sendVerificationEmail({ email: email.value, callbackURL: location.origin });
+    message.value = 'If verification is available for this account, an email will arrive shortly.';
+  } catch {
+    message.value = 'Unable to connect. Try again.';
+  } finally {
+    busy.value = false;
+  }
+}
+</script>
+<template>
+  <div class="mx-auto grid max-w-sm gap-5">
+    <h1 class="text-3xl font-semibold tracking-tight">Check your inbox.</h1>
+    <p class="text-sm text-muted-foreground">
+      Open your verification email to finish creating your account. If a link expired, request a new
+      one.
+    </p>
+    <form class="grid gap-4" @submit.prevent="resend">
+      <label for="verify-email">Email address</label
+      ><Input
+        id="verify-email"
+        type="email"
+        v-model="email"
+        autocomplete="username"
+        required
+      /><Button type="submit" :disabled="busy">Send verification email</Button>
+    </form>
+    <p v-if="message" role="status" class="text-sm">{{ message }}</p>
+    <a href="/login" class="text-sm underline">Return to sign in</a>
+  </div>
+</template>

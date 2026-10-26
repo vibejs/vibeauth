@@ -1,0 +1,174 @@
+<script setup lang="ts">
+import { ref, onMounted } from '@usevibejs/ui';
+import { auth as instance } from './auth.ts';
+import Button from '../../shared/ui/Button.vibe';
+import Input from '../../shared/ui/Input.vibe';
+import InputOTP from '../../shared/ui/InputOTP.vibe';
+import InputOTPGroup from '../../shared/ui/InputOTPGroup.vibe';
+import InputOTPSlot from '../../shared/ui/InputOTPSlot.vibe';
+const auth = instance.useAuth();
+const password = ref('');
+const code = ref('');
+const uri = ref('');
+const backupCodes = ref<string[]>([]);
+const message = ref('');
+const busy = ref(false);
+const passkeys = ref<{ id: string; name?: string | null }[]>([]);
+const passkeyName = ref('My device');
+const supported = window.isSecureContext && 'PublicKeyCredential' in window;
+async function run(action: () => Promise<void>) {
+  busy.value = true;
+  message.value = '';
+  try {
+    await action();
+  } catch {
+    message.value = 'Unable to complete this security change. Check your details and try again.';
+  } finally {
+    busy.value = false;
+    password.value = '';
+  }
+}
+async function enable() {
+  await run(async () => {
+    const result = await auth.client.twoFactor.enable({ password: password.value });
+    if (result.error) throw new Error();
+    if (result.data && 'totpURI' in result.data) {
+      uri.value = result.data.totpURI;
+      backupCodes.value = result.data.backupCodes;
+    }
+  });
+}
+async function verify() {
+  await run(async () => {
+    const result = await auth.client.twoFactor.verifyTotp({ code: code.value });
+    code.value = '';
+    if (result.error) throw new Error();
+    uri.value = '';
+    await auth.refreshSession();
+    message.value = 'Two-factor authentication enabled. Save your recovery codes.';
+  });
+}
+async function disable() {
+  await run(async () => {
+    const result = await auth.client.twoFactor.disable({ password: password.value });
+    if (result.error) throw new Error();
+    backupCodes.value = [];
+    uri.value = '';
+    await auth.refreshSession();
+  });
+}
+async function loadPasskeys() {
+  const result = await auth.client.passkey.listUserPasskeys();
+  if (result.data) passkeys.value = result.data;
+}
+async function addPasskey() {
+  await run(async () => {
+    const result = await auth.client.passkey.addPasskey({ name: passkeyName.value });
+    if (result.error) throw new Error();
+    await loadPasskeys();
+  });
+}
+async function rename(id: string) {
+  await run(async () => {
+    const result = await auth.client.passkey.updatePasskey({ id, name: passkeyName.value });
+    if (result.error) throw new Error();
+    await loadPasskeys();
+  });
+}
+async function remove(id: string) {
+  await run(async () => {
+    const result = await auth.client.passkey.deletePasskey({ id });
+    if (result.error) throw new Error();
+    await loadPasskeys();
+  });
+}
+onMounted(() => {
+  void loadPasskeys();
+});
+</script>
+<template>
+  <div class="grid gap-10">
+    <section class="grid gap-4">
+      <h2 class="text-xl font-semibold tracking-tight">Two-factor authentication</h2>
+      <p class="text-sm text-muted-foreground">
+        {{
+          auth.user.value?.twoFactorEnabled
+            ? 'Enabled for password sign-in.'
+            : 'Add an authenticator app to your password sign-in.'
+        }}
+      </p>
+      <form
+        v-if="!uri"
+        class="grid gap-3"
+        @submit.prevent="auth.user.value?.twoFactorEnabled ? disable() : enable()"
+      >
+        <label for="mfa-password" class="text-sm font-medium">Confirm your password</label
+        ><Input
+          id="mfa-password"
+          type="password"
+          v-model="password"
+          autocomplete="current-password"
+          required
+        /><Button type="submit" :disabled="busy">{{
+          auth.user.value?.twoFactorEnabled
+            ? 'Disable two-factor authentication'
+            : 'Set up authenticator app'
+        }}</Button>
+      </form>
+      <div v-if="uri" class="grid gap-4">
+        <p class="text-sm">
+          Open this enrollment link in your authenticator app, then enter its code.
+        </p>
+        <a :href="uri" class="break-all text-sm underline">Add VibeAuth to authenticator</a>
+        <form class="grid gap-3" @submit.prevent="verify">
+          <label for="enrollment-code" class="text-sm font-medium">Authenticator code</label
+          ><InputOTP id="enrollment-code" v-model="code" required aria-label="Authenticator code"
+            ><InputOTPGroup
+              ><InputOTPSlot v-for="n in 6" :key="n" :index="n - 1" /></InputOTPGroup></InputOTP
+          ><Button type="submit" :disabled="busy">Verify enrollment</Button>
+        </form>
+      </div>
+      <div v-if="backupCodes.length" class="grid gap-3 rounded-lg border p-4">
+        <h3 class="font-medium">Save your recovery codes</h3>
+        <p class="text-sm text-muted-foreground">
+          Each code works once. Keep these somewhere private.
+        </p>
+        <ul class="grid grid-cols-2 gap-2 font-mono text-sm">
+          <li v-for="backup in backupCodes" :key="backup">{{ backup }}</li>
+        </ul>
+        <Button variant="outline" @click="backupCodes = []">I saved my codes</Button>
+      </div>
+    </section>
+    <section class="grid gap-4">
+      <h2 class="text-xl font-semibold tracking-tight">Passkeys</h2>
+      <p v-if="!supported" role="status" class="text-sm text-muted-foreground">
+        Passkeys require a supported browser and a secure connection.
+      </p>
+      <form class="grid gap-3" @submit.prevent="addPasskey">
+        <label for="passkey-name" class="text-sm font-medium">Passkey name</label
+        ><Input id="passkey-name" v-model="passkeyName" required :maxlength="100" /><Button
+          type="submit"
+          :disabled="busy || !supported"
+          >Add passkey</Button
+        >
+      </form>
+      <ul class="divide-y">
+        <li
+          v-for="key in passkeys"
+          :key="key.id"
+          class="flex items-center justify-between gap-3 py-3"
+        >
+          <span>{{ key.name || 'Passkey' }}</span>
+          <div class="flex gap-2">
+            <Button variant="outline" size="sm" :disabled="busy" @click="rename(key.id)"
+              >Use new name</Button
+            ><Button variant="outline" size="sm" :disabled="busy" @click="remove(key.id)"
+              >Remove</Button
+            >
+          </div>
+        </li>
+      </ul>
+    </section>
+    <p v-if="message" role="status" class="text-sm">{{ message }}</p>
+  </div>
+</template>

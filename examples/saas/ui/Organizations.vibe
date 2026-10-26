@@ -1,0 +1,239 @@
+<script setup lang="ts">
+import { ref, onMounted } from '@usevibejs/ui';
+import { createClient } from '@usevibejs/contract';
+import { workspace } from '../../shared/contracts.ts';
+import { auth as instance } from './auth.ts';
+import Button from '../../shared/ui/Button.vibe';
+import Input from '../../shared/ui/Input.vibe';
+import NativeSelect from '../../shared/ui/NativeSelect.vibe';
+const auth = instance.useAuth();
+const api = createClient({ workspace }, { baseUrl: '/api' });
+const organizations = ref<{ id: string; name: string }[]>([]);
+const active = ref('');
+const name = ref('');
+const slug = ref('');
+const email = ref('');
+const role = ref('member');
+const invitationId = ref(new URLSearchParams(location.search).get('invitationId') ?? '');
+const members = ref<{ id: string; role: string; user: { name: string; email: string } }[]>([]);
+const projects = ref<{ id: string; name: string }[]>([]);
+const projectName = ref('');
+const busy = ref(false);
+const message = ref('');
+async function run(action: () => Promise<void>) {
+  busy.value = true;
+  message.value = '';
+  try {
+    await action();
+    return true;
+  } catch {
+    message.value = 'Access denied or unable to complete this change.';
+    return false;
+  } finally {
+    busy.value = false;
+  }
+}
+async function load() {
+  const result = await auth.client.organization.list();
+  organizations.value = result.data ?? [];
+}
+async function select() {
+  members.value = [];
+  projects.value = [];
+  await run(async () => {
+    const result = await auth.client.organization.setActive({ organizationId: active.value });
+    if (result.error) throw new Error();
+    const full = await auth.client.organization.getFullOrganization({
+      query: { organizationId: active.value },
+    });
+    if (full.error) throw new Error();
+    members.value = full.data?.members ?? [];
+    const resultProjects = await api.workspace.projects({
+      params: { organizationId: active.value },
+    });
+    if (resultProjects.ok) projects.value = resultProjects.data;
+    await auth.refreshSession();
+  });
+}
+async function create() {
+  await run(async () => {
+    const result = await auth.client.organization.create({ name: name.value, slug: slug.value });
+    if (result.error) throw new Error();
+    await load();
+    name.value = '';
+    slug.value = '';
+  });
+}
+async function invite() {
+  await run(async () => {
+    const result = await auth.client.organization.inviteMember({
+      organizationId: active.value,
+      email: email.value,
+      role: role.value === 'admin' ? 'admin' : 'member',
+    });
+    if (result.error) throw new Error();
+    message.value = 'Invitation sent.';
+    email.value = '';
+  });
+}
+async function accept() {
+  await run(async () => {
+    const result = await auth.client.organization.acceptInvitation({
+      invitationId: invitationId.value,
+    });
+    if (result.error) throw new Error();
+    invitationId.value = '';
+    await load();
+  });
+}
+async function remove(memberId: string) {
+  if (
+    await run(async () => {
+      const result = await auth.client.organization.removeMember({
+        organizationId: active.value,
+        memberIdOrEmail: memberId,
+      });
+      if (result.error) throw new Error();
+    })
+  )
+    await select();
+}
+async function changeRole(memberId: string, current: string) {
+  if (
+    await run(async () => {
+      const result = await auth.client.organization.updateMemberRole({
+        organizationId: active.value,
+        memberId,
+        role: current === 'admin' ? 'member' : 'admin',
+      });
+      if (result.error) throw new Error();
+    })
+  )
+    await select();
+}
+async function rename() {
+  await run(async () => {
+    const result = await auth.client.organization.update({
+      organizationId: active.value,
+      data: { name: name.value },
+    });
+    if (result.error) throw new Error();
+    name.value = '';
+    await load();
+  });
+}
+async function createProject() {
+  if (
+    await run(async () => {
+      const result = await api.workspace.createProject({
+        params: { organizationId: active.value },
+        body: { name: projectName.value },
+      });
+      if (!result.ok) throw new Error();
+      projectName.value = '';
+    })
+  )
+    await select();
+}
+onMounted(() => {
+  void load();
+});
+</script>
+<template>
+  <div class="grid gap-8">
+    <section class="grid gap-4">
+      <h2 class="text-xl font-semibold tracking-tight">Workspaces</h2>
+      <label for="workspace" class="text-sm">Active workspace</label
+      ><NativeSelect id="workspace" v-model="active" @change="select"
+        ><option value="">Choose a workspace</option>
+        <option v-for="org in organizations" :key="org.id" :value="org.id">
+          {{ org.name }}
+        </option></NativeSelect
+      >
+      <form class="grid gap-3" @submit.prevent="create">
+        <label for="org-name">Workspace name</label
+        ><Input id="org-name" v-model="name" required /><label for="org-slug"
+          >Workspace URL name</label
+        ><Input id="org-slug" v-model="slug" required pattern="[a-z0-9-]+" /><Button
+          type="submit"
+          :disabled="busy"
+          >Create workspace</Button
+        >
+      </form>
+    </section>
+    <form class="grid gap-3" @submit.prevent="accept">
+      <label for="invite-id">Invitation ID</label
+      ><Input id="invite-id" v-model="invitationId" required /><Button
+        type="submit"
+        variant="outline"
+        :disabled="busy"
+        >Accept invitation</Button
+      >
+    </form>
+    <div v-if="active" class="grid gap-8">
+      <section class="grid gap-3">
+        <h2 class="text-lg font-semibold">Workspace settings</h2>
+        <Button variant="outline" :disabled="busy || !name" @click="rename"
+          >Rename using workspace name above</Button
+        >
+      </section>
+      <section class="grid gap-4">
+        <h2 class="text-lg font-semibold">Members</h2>
+        <ul class="divide-y">
+          <li
+            v-for="member in members"
+            :key="member.id"
+            class="flex flex-wrap items-center justify-between gap-2 py-3"
+          >
+            <div>
+              <p class="text-sm font-medium">{{ member.user.name }}</p>
+              <p class="text-xs text-muted-foreground">
+                {{ member.user.email }} · {{ member.role }}
+              </p>
+            </div>
+            <div v-if="member.role !== 'owner'" class="flex gap-2">
+              <Button
+                size="sm"
+                variant="outline"
+                :disabled="busy"
+                @click="changeRole(member.id, member.role)"
+                >Make {{ member.role === 'admin' ? 'member' : 'admin' }}</Button
+              ><Button size="sm" variant="outline" :disabled="busy" @click="remove(member.id)"
+                >Remove</Button
+              >
+            </div>
+          </li>
+        </ul>
+        <form class="grid gap-3" @submit.prevent="invite">
+          <label for="invite-email">Invite by email</label
+          ><Input id="invite-email" type="email" v-model="email" required /><NativeSelect
+            v-model="role"
+            aria-label="Invitation role"
+            ><option value="member">Member</option>
+            <option value="admin">Admin</option></NativeSelect
+          ><Button type="submit" :disabled="busy">Send invitation</Button>
+        </form>
+      </section>
+      <section class="grid gap-4">
+        <h2 class="text-lg font-semibold">Projects</h2>
+        <ul>
+          <li v-for="project in projects" :key="project.id" class="py-2 text-sm">
+            {{ project.name }}
+          </li>
+        </ul>
+        <form class="grid gap-3" @submit.prevent="createProject">
+          <label for="project-name">Project name</label
+          ><Input id="project-name" v-model="projectName" required /><Button
+            type="submit"
+            :disabled="busy"
+            >Create project</Button
+          >
+        </form>
+        <p class="text-xs text-muted-foreground">
+          Workspace owners and admins can create projects. Members can read them.
+        </p>
+      </section>
+    </div>
+    <p v-if="message" role="status" class="text-sm">{{ message }}</p>
+  </div>
+</template>

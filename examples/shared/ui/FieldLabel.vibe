@@ -1,0 +1,26 @@
+<!-- Adapted from shadcn/ui under MIT. See vibecn.LICENSE. -->
+<script setup lang="ts">
+import type { ClassValue } from '@usevibejs/ui';
+import { cn } from '../lib/utils.ts';
+import Label from './Label.vibe';
+
+defineOptions({ inheritAttrs: false });
+
+const { class: className, for: htmlFor } = defineProps<{ class?: ClassValue; for?: string }>();
+defineSlots<{ default?: (props: {}) => unknown }>();
+</script>
+
+<template>
+  <Label
+    data-slot="field-label"
+    :for="htmlFor"
+    v-bind="$attrs"
+    :class="
+      cn(
+        'group/field-label peer/field-label flex w-fit gap-2 leading-snug group-data-[disabled=true]/field:opacity-50 has-[>[data-slot=field]]:w-full has-[>[data-slot=field]]:flex-col has-[>[data-slot=field]]:rounded-md has-[>[data-slot=field]]:border [&>*]:data-[slot=field]:p-4 has-data-[state=checked]:border-primary has-data-[state=checked]:bg-primary/5 dark:has-data-[state=checked]:bg-primary/10',
+        className,
+      )
+    "
+    ><slot
+  /></Label>
+</template>

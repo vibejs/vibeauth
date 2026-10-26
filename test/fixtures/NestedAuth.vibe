@@ -1,0 +1,13 @@
+<script setup lang="ts">
+import { provideAuth, useAuth, type VibeAuthClient } from '@usevibejs/auth';
+import Identity from './Identity.vibe';
+const { override } = defineProps<{ override: VibeAuthClient }>();
+const parent = useAuth();
+provideAuth(override);
+</script>
+<template>
+  <div>
+    <p data-parent>{{ parent.user.value?.name }}</p>
+    <Identity />
+  </div>
+</template>

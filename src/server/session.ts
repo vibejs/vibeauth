@@ -1,5 +1,5 @@
-import { HttpError, type RequestContext } from "@usevibejs/server";
-import { sanitizeSession, type SafeSession, type SessionData } from "../shared/types.ts";
+import { HttpError, type RequestContext } from '@usevibejs/server';
+import { sanitizeSession, type SafeSession, type SessionData } from '../shared/types.ts';
 
 /** Structural public interface, so plugin/custom-field inference remains with Better Auth. */
 export interface SessionSource<S extends SessionData> {
@@ -70,6 +70,6 @@ export async function requireAuthSession<S extends SessionData>(
   ctx: RequestContext,
 ) {
   const session = await getAuthSession(auth, ctx);
-  if (!session.authenticated) throw new HttpError(401, "UNAUTHORIZED", "Authentication required.");
+  if (!session.authenticated) throw new HttpError(401, 'UNAUTHORIZED', 'Authentication required.');
   return session;
 }

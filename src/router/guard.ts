@@ -1,16 +1,16 @@
-import type { RouteLocation, RouteRecordRaw } from "@usevibejs/ui/router";
-import type { AuthState } from "../client/client.ts";
-import type { SessionData } from "../shared/types.ts";
-import { safeReturnURL } from "./redirect.ts";
+import type { RouteLocation, RouteRecordRaw } from '@usevibejs/ui/router';
+import type { AuthState } from '../client/client.ts';
+import type { SessionData } from '../shared/types.ts';
+import { safeReturnURL } from './redirect.ts';
 
 export interface AuthRouteMeta {
-  mode?: "public" | "guest" | "authenticated";
+  mode?: 'public' | 'guest' | 'authenticated';
   verifiedEmail?: boolean;
   permissions?: readonly string[];
   organization?: boolean;
 }
 
-declare module "@usevibejs/ui/router" {
+declare module '@usevibejs/ui/router' {
   interface RouteMeta {
     auth?: AuthRouteMeta;
   }
@@ -37,17 +37,17 @@ export function createAuthRouteGuard<S extends SessionData>(
   from: RouteLocation<readonly RouteRecordRaw[]>,
 ) => Promise<void | false | { path: string; replace: boolean; query?: { returnTo: string } }> {
   const { auth } = options;
-  const login = safeReturnURL(options.login ?? "/login");
-  const home = safeReturnURL(options.home ?? "/");
-  const forbidden = safeReturnURL(options.forbidden ?? "/forbidden");
-  const verifyEmail = safeReturnURL(options.verifyEmail ?? "/verify-email");
+  const login = safeReturnURL(options.login ?? '/login');
+  const home = safeReturnURL(options.home ?? '/');
+  const forbidden = safeReturnURL(options.forbidden ?? '/forbidden');
+  const verifyEmail = safeReturnURL(options.verifyEmail ?? '/verify-email');
   let navigation = 0;
   return async (to) => {
     const current = ++navigation;
     const rules = to.matched.flatMap((record) => (record.meta.auth ? [record.meta.auth] : []));
     if (
       !rules.length ||
-      (rules.every((rule) => !rule.mode || rule.mode === "public") &&
+      (rules.every((rule) => !rule.mode || rule.mode === 'public') &&
         rules.every(
           (rule) => !rule.verifiedEmail && !rule.permissions?.length && !rule.organization,
         ))
@@ -55,7 +55,7 @@ export function createAuthRouteGuard<S extends SessionData>(
       return;
     await auth.ready();
     if (current !== navigation) return false;
-    if (auth.status.value === "error") return false;
+    if (auth.status.value === 'error') return false;
     const loggedIn = auth.isAuthenticated.value;
     const redirect = (path: string, returnURL = false) => {
       if (to.path === path.split(/[?#]/)[0]) return false;
@@ -69,7 +69,7 @@ export function createAuthRouteGuard<S extends SessionData>(
       if (
         rules.some(
           (r) =>
-            r.mode === "authenticated" ||
+            r.mode === 'authenticated' ||
             r.verifiedEmail ||
             r.permissions?.length ||
             r.organization,
@@ -78,7 +78,7 @@ export function createAuthRouteGuard<S extends SessionData>(
         return redirect(login, true);
       return;
     }
-    if (rules.some((r) => r.mode === "guest")) return redirect(home);
+    if (rules.some((r) => r.mode === 'guest')) return redirect(home);
     if (rules.some((r) => r.verifiedEmail) && !auth.user.value?.emailVerified)
       return redirect(verifyEmail);
     const userId = auth.user.value?.id;

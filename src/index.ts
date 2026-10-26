@@ -3,7 +3,7 @@ export {
   type VibeAuthClient,
   type AuthState,
   type ClientSession,
-} from "./client/client.ts";
+} from './client/client.ts';
 export {
   createAuthPlugin,
   provideAuth,
@@ -13,5 +13,5 @@ export {
   useIsAuthenticated,
   useAuthStatus,
   authKey,
-} from "./client/context.ts";
-export type { AuthStatus, SafeSession, SessionData } from "./shared/types.ts";
+} from './client/context.ts';
+export type { AuthStatus, SafeSession, SessionData } from './shared/types.ts';
