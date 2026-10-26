@@ -1,8 +1,8 @@
 # Installation and quick start
 
-Use Node `^24.15.0 || >=26` and pnpm 11.18.0. Match the Vibe.js runtime/compiler at 0.1.0.
+Use Node `^24.15.0 || >=26` and pnpm 11.18.0. Match the vibe.js runtime/compiler at 0.1.0.
 Better Auth 1.7.13 is the tested stable release. Install VibeAuth with Better Auth and the
-Vibe.js peer for the entry you use.
+vibe.js peer for the entry you use.
 
 ```sh
 pnpm add @usevibejs/auth better-auth@1.7.13 @usevibejs/ui@0.1.0

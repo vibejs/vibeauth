@@ -13,7 +13,7 @@ router.beforeEach(
 );
 ```
 
-Route metadata is typed through Vibe.js's public RouteMeta augmentation:
+Route metadata is typed through vibe.js's public RouteMeta augmentation:
 
 ```ts
 { path: '/dashboard', component: Dashboard, meta: { auth: { mode: 'authenticated' } } }

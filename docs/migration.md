@@ -16,6 +16,6 @@ quality gates including the packed independent consumer. Run provider/manual dep
 separately where credentials are required. Publish an adapter changeset when public behavior
 changes. Do not widen peer ranges based only on compilation or a Node build.
 
-For Vibe.js upgrades: verify public lifecycle, router, guard and middleware contracts. Match
+For vibe.js upgrades: verify public lifecycle, router, guard and middleware contracts. Match
 compiler/runtime versions for all `.vibe` compositions. Source UI is copy-owned, so application
 owners review primitive/composition changes instead of receiving invisible UI runtime updates.

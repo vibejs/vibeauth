@@ -25,7 +25,7 @@ async function signOut() {
       <a href="/" class="brand"><span class="brand-mark" aria-hidden="true">v/a</span>VibeAuth</a>
       <div>
         <p class="mb-5 text-xs uppercase tracking-widest text-muted-foreground">
-          Authentication, Native to Vibe.js
+          Authentication, Native to vibe.js
         </p>
         <h2 class="aside-title">A familiar welcome.<br />A secure way in.</h2>
         <p class="mt-5 max-w-xs text-sm leading-relaxed text-muted-foreground">

@@ -5,7 +5,7 @@ export interface AuthHandler {
   options?: object;
 }
 
-/** Mount at an absolute URL pathname, independent of the Vibe.js controller basePath. */
+/** Mount at an absolute URL pathname, independent of the vibe.js controller basePath. */
 export function createAuthMiddleware(
   auth: AuthHandler,
   options: { basePath?: string } = {},

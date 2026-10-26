@@ -12,7 +12,7 @@ constraints. The form passes submitted values straight to Better Auth, clears pa
 after security-sensitive actions, and exposes safe public messages. VibeForm does not validate
 server credentials; Better Auth still enforces its password and account policies.
 
-The core adapter also works with ordinary Vibe.js forms. A form is not an authentication store.
+The core adapter also works with ordinary vibe.js forms. A form is not an authentication store.
 
 ## VibeQuery
 

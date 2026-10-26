@@ -1,7 +1,7 @@
 # Third-party notices
 
-VibeAuth's runtime is original adapter code under MIT. Better Auth and Vibe.js are external
-peer dependencies, not bundled or relicensed. Better Auth is MIT licensed; Vibe.js is MIT
+VibeAuth's runtime is original adapter code under MIT. Better Auth and vibe.js are external
+peer dependencies, not bundled or relicensed. Better Auth is MIT licensed; vibe.js is MIT
 licensed. Their upstream notices remain in their distributions.
 
 The examples copy Vibecn primitives, theme and utilities under MIT, including adaptations
