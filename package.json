@@ -1,6 +1,6 @@
 {
   "name": "@usevibejs/auth",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Authentication for vibe.js, powered by Better Auth.",
   "keywords": [
     "auth",
