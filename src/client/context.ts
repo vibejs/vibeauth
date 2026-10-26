@@ -4,12 +4,12 @@ import {
   provide,
   type InjectionKey,
   type Plugin,
-} from "@usevibejs/ui";
-import type { BetterAuthClientOptions } from "better-auth/client";
-import type { VibeAuthClient } from "./client.ts";
+} from '@usevibejs/ui';
+import type { BetterAuthClientOptions } from 'better-auth/client';
+import type { VibeAuthClient } from './client.ts';
 
 // The default composables expose core Better Auth types. Instance composables retain extensions.
-export const authKey: InjectionKey<VibeAuthClient> = Symbol("vibeauth.client");
+export const authKey: InjectionKey<VibeAuthClient> = Symbol('vibeauth.client');
 
 export function createAuthPlugin<O extends BetterAuthClientOptions>(
   auth: VibeAuthClient<O>,
@@ -34,9 +34,9 @@ export function useAuth(): VibeAuthClient;
 export function useAuth(override?: VibeAuthClient): VibeAuthClient {
   if (override) return override.useAuth();
   if (!hasInjectionContext())
-    throw new Error("VIBEAUTH_CONTEXT: Install createAuthPlugin and call useAuth in setup.");
+    throw new Error('VIBEAUTH_CONTEXT: Install createAuthPlugin and call useAuth in setup.');
   const auth = inject(authKey, undefined);
-  if (!auth) throw new Error("VIBEAUTH_CONTEXT: No auth client was provided.");
+  if (!auth) throw new Error('VIBEAUTH_CONTEXT: No auth client was provided.');
   return auth.useAuth();
 }
 

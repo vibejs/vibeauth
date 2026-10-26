@@ -1,0 +1,81 @@
+<!-- Adapted from shadcn/ui under MIT. See vibecn.LICENSE. -->
+<script setup lang="ts">
+import { provide, ref, toRef, useTemplateRef } from '@usevibejs/ui';
+import type { ClassValue } from '@usevibejs/ui';
+import { cn } from '../lib/utils.ts';
+
+defineOptions({ inheritAttrs: false });
+
+const {
+  class: className,
+  maxlength = 6,
+  pattern = '\\d',
+  name,
+  disabled = false,
+  required = false,
+} = defineProps<{
+  class?: ClassValue;
+  maxlength?: number;
+  /** A regular expression for one allowed character. Digits by default. */
+  pattern?: string;
+  name?: string;
+  disabled?: boolean;
+  required?: boolean;
+}>();
+const model = defineModel<string>({ default: () => '' });
+const emit = defineEmits<{ complete: [value: string] }>();
+defineSlots<{ default?: (props: {}) => unknown }>();
+const input = useTemplateRef<HTMLInputElement>('input');
+const focused = ref(false);
+const caret = ref(0);
+defineExpose({ focus: () => input.value?.focus() });
+
+// One real input receives the typing, pasting and one-time-code autofill; the slots show it.
+function onInput(): void {
+  const allowed = new RegExp(pattern);
+  const value = [...input.value!.value]
+    .filter((character) => allowed.test(character))
+    .join('')
+    .slice(0, maxlength);
+  input.value!.value = value;
+  model.value = value;
+  onSelect();
+  if (value.length === maxlength) emit('complete', value);
+}
+function onSelect(): void {
+  caret.value = Math.min(input.value!.selectionStart ?? model.value.length, maxlength - 1);
+}
+
+provide(Symbol.for('vibecn.input-otp'), {
+  model,
+  active: (index: number) => focused.value && caret.value === index,
+  caret: toRef(() => focused.value && model.value.length < maxlength),
+});
+</script>
+
+<template>
+  <div
+    data-slot="input-otp"
+    :class="cn('relative flex items-center gap-2 has-disabled:opacity-50', className)"
+  >
+    <slot />
+    <input
+      ref="input"
+      :value="model"
+      :maxlength="maxlength"
+      :name="name"
+      :disabled="disabled"
+      :required="required"
+      inputmode="numeric"
+      autocomplete="one-time-code"
+      spellcheck="false"
+      v-bind="$attrs"
+      class="absolute inset-0 w-full cursor-text bg-transparent text-transparent caret-transparent opacity-0 outline-none disabled:cursor-not-allowed"
+      @input="onInput"
+      @select="onSelect"
+      @keyup="onSelect"
+      @focus="focused = true"
+      @blur="focused = false"
+    />
+  </div>
+</template>

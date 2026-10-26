@@ -1,6 +1,6 @@
-import { HttpError, type CanActivate, type RequestContext } from "@usevibejs/server";
-import type { SessionData } from "../shared/types.ts";
-import { getAuthSession, type AuthContext, type SessionSource } from "./session.ts";
+import { HttpError, type CanActivate, type RequestContext } from '@usevibejs/server';
+import type { SessionData } from '../shared/types.ts';
+import { getAuthSession, type AuthContext, type SessionSource } from './session.ts';
 
 export type AuthenticatedContext<S extends SessionData> = Extract<
   AuthContext<S>,
@@ -29,13 +29,13 @@ export function createAuthGuard<S extends SessionData>(
       const identity = await getAuthSession(auth, ctx);
       if (!identity.authenticated) {
         if (options.optional && !options.verifiedEmail && !options.policy) return true;
-        throw new HttpError(401, "UNAUTHORIZED", "Authentication required.");
+        throw new HttpError(401, 'UNAUTHORIZED', 'Authentication required.');
       }
       if (
         (options.verifiedEmail && !identity.user.emailVerified) ||
         (options.policy && !(await options.policy(identity, ctx)))
       ) {
-        throw new HttpError(403, "FORBIDDEN", "Access denied.");
+        throw new HttpError(403, 'FORBIDDEN', 'Access denied.');
       }
       return true;
     }

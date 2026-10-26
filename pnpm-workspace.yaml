@@ -3,19 +3,32 @@ packages:
   - examples/*
 catalogMode: strict
 catalog:
-  "@usevibejs/ui": 0.1.0
-  "@usevibejs/server": 0.1.0
-  "@usevibejs/contract": 0.1.0
-  "@usevibejs/compiler": 0.1.0
-  "@usevibejs/language-tools": 0.1.0
+  esbuild: 0.28.2
+  '@electric-sql/pglite': 0.5.11
+  drizzle-orm: 0.45.4
+  drizzle-kit: 0.31.9
+  '@better-auth/drizzle-adapter': 1.7.13
+  srvx: 1.0.7
+  '@better-auth/utils': 0.5.1
+  clsx: 2.1.1
+  tailwind-merge: 3.7.0
+  '@tailwindcss/vite': 4.3.3
+  tailwindcss: 4.3.3
+  '@usevibejs/form': 0.1.0
+  '@usevibejs/query': 0.1.0
+  '@usevibejs/ui': 0.1.0
+  '@usevibejs/server': 0.1.0
+  '@usevibejs/contract': 0.1.0
+  '@usevibejs/compiler': 0.1.0
+  '@usevibejs/language-tools': 0.1.0
   better-auth: 1.7.13
-  "@better-auth/passkey": 1.7.13
+  '@better-auth/passkey': 1.7.13
   auth: 1.7.13
   typescript: 7.0.2
   tsdown: 0.23.1
   vitest: 5.0.5
-  "@vitest/coverage-v8": 5.0.5
-  "@vitest/browser-playwright": 5.0.5
+  '@vitest/coverage-v8': 5.0.5
+  '@vitest/browser-playwright': 5.0.5
   playwright: 1.64.1
   jsdom: 30.1.3
   vite: 8.3.4
@@ -23,20 +36,26 @@ catalog:
   oxlint: 1.88.0
   oxfmt: 0.73.0
   publint: 0.3.25
-  "@changesets/cli": 3.0.3
-  "@types/node": 24.19.2
+  '@changesets/cli': 3.0.3
+  '@types/node': 24.19.2
   valibot: 1.5.0
 catalogs:
   ts-next:
     typescript: 7.1.0-dev.20261015.1
 minimumReleaseAgeExclude:
-  - "@better-auth/core@1.7.13"
-  - "@better-auth/drizzle-adapter@1.7.13"
-  - "@better-auth/kysely-adapter@1.7.13"
-  - "@better-auth/memory-adapter@1.7.13"
-  - "@better-auth/mongo-adapter@1.7.13"
-  - "@better-auth/passkey@1.7.13"
-  - "@better-auth/prisma-adapter@1.7.13"
-  - "@better-auth/telemetry@1.7.13"
+  - '@better-auth/core@1.7.13'
+  - '@better-auth/drizzle-adapter@1.7.13'
+  - '@better-auth/kysely-adapter@1.7.13'
+  - '@better-auth/memory-adapter@1.7.13'
+  - '@better-auth/mongo-adapter@1.7.13'
+  - '@better-auth/passkey@1.7.13'
+  - '@better-auth/prisma-adapter@1.7.13'
+  - '@better-auth/telemetry@1.7.13'
   - auth@1.7.13
   - better-auth@1.7.13
+overrides:
+  '@esbuild-kit/core-utils>esbuild': 0.28.2
+  '@usevibejs/form': file:.local-packs/usevibejs-form-0.1.0.tgz
+  '@usevibejs/query': file:.local-packs/usevibejs-query-0.1.0.tgz
+allowBuilds:
+  esbuild: true

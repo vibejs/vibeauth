@@ -1,0 +1,15 @@
+<script setup lang="ts">
+import { useAuth } from '@usevibejs/auth';
+import Account from '../../shared/components/Account.vibe';
+const auth = useAuth();
+</script>
+<template>
+  <div>
+    <p class="mb-3 text-xs uppercase tracking-widest text-muted-foreground">Account overview</p>
+    <h1 class="mb-2 text-3xl font-semibold tracking-tight">Hello, {{ auth.user.value?.name }}.</h1>
+    <p class="mb-10 text-sm text-muted-foreground">
+      Your profile, devices, and security in one place.
+    </p>
+    <Account />
+  </div>
+</template>

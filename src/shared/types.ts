@@ -6,19 +6,19 @@ export interface SessionData {
 
 /** Opaque session credentials must never enter VibeAuth's request or reactive context. */
 export type SafeSession<S extends SessionData> = {
-  readonly user: S["user"];
-  readonly session: Omit<S["session"], "token">;
+  readonly user: S['user'];
+  readonly session: Omit<S['session'], 'token'>;
 };
 
 export type AuthStatus =
-  | "loading"
-  | "authenticated"
-  | "unauthenticated"
-  | "refreshing"
-  | "error"
-  | "expired";
+  | 'loading'
+  | 'authenticated'
+  | 'unauthenticated'
+  | 'refreshing'
+  | 'error'
+  | 'expired';
 
 export function sanitizeSession<S extends SessionData>(data: S): SafeSession<S> {
-  const { token: _token, ...session } = data.session as S["session"] & { token?: unknown };
+  const { token: _token, ...session } = data.session as S['session'] & { token?: unknown };
   return { user: data.user, session };
 }

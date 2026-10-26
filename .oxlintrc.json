@@ -1,0 +1,67 @@
+{
+  "plugins": ["typescript", "import", "vitest"],
+  "categories": {
+    "correctness": "error",
+    "suspicious": "error"
+  },
+  "rules": {
+    "import/no-default-export": "error",
+    "typescript/no-explicit-any": "error",
+    "vitest/no-focused-tests": "error",
+    "import/no-unassigned-import": [
+      "error",
+      {
+        "allow": ["**/*.css"]
+      }
+    ]
+  },
+  "overrides": [
+    {
+      "files": ["**/*.config.ts", "docs/.vitepress/config.ts"],
+      "rules": {
+        "import/no-default-export": "off"
+      }
+    },
+    {
+      "files": ["src/client/**/*.ts", "src/index.ts", "src/router/**/*.ts", "src/router.ts"],
+      "rules": {
+        "no-restricted-imports": [
+          "error",
+          {
+            "patterns": [
+              "@usevibejs/server",
+              "better-auth",
+              "better-auth/plugins",
+              "node:*",
+              "@usevibejs/ui/internal"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "files": ["src/server/**/*.ts"],
+      "rules": {
+        "no-restricted-imports": [
+          "error",
+          {
+            "patterns": ["@usevibejs/ui", "@usevibejs/ui/internal"]
+          }
+        ]
+      }
+    },
+    {
+      "files": ["**/*.test.ts", "**/*.test-d.ts"],
+      "rules": {
+        "vitest/require-mock-type-parameters": "off"
+      }
+    }
+  ],
+  "ignorePatterns": [
+    "**/dist/**",
+    "coverage/**",
+    ".vitest/**",
+    "test-results/**",
+    "test/generated/**"
+  ]
+}

@@ -1,0 +1,56 @@
+<script setup lang="ts">
+import { ref, watch } from '@usevibejs/ui';
+import { RouterView, useRouter } from '@usevibejs/ui/router';
+import { useAuth } from '@usevibejs/auth';
+import { useQueryClient } from '@usevibejs/query';
+import Button from '../../shared/ui/Button.vibe';
+const auth = useAuth();
+const queryClient = useQueryClient();
+const router = useRouter();
+const dark = ref(matchMedia('(prefers-color-scheme: dark)').matches);
+watch(dark, (value) => document.documentElement.classList.toggle('dark', value), {
+  immediate: true,
+});
+async function signOut() {
+  await queryClient.cancelQueries();
+  queryClient.clear();
+  await auth.client.signOut();
+  await auth.refreshSession();
+  await router.replace('/login');
+}
+</script>
+<template>
+  <div class="auth-shell">
+    <aside class="auth-aside">
+      <a href="/" class="brand"><span class="brand-mark" aria-hidden="true">v/a</span>VibeAuth</a>
+      <div>
+        <p class="mb-5 text-xs uppercase tracking-widest text-muted-foreground">
+          Authentication, Native to Vibe.js
+        </p>
+        <h2 class="aside-title">A familiar welcome.<br />A secure way in.</h2>
+        <p class="mt-5 max-w-xs text-sm leading-relaxed text-muted-foreground">
+          Your account belongs to you. Keep your details current and choose where you stay signed
+          in.
+        </p>
+      </div>
+      <div class="aside-footer">
+        <p class="session-line">{{ auth.status.value }}</p>
+        <p class="mt-4 text-xs text-muted-foreground">Your next session starts here.</p>
+      </div>
+    </aside>
+    <main class="auth-content">
+      <div class="mb-10 flex justify-end gap-2">
+        <Button variant="ghost" size="sm" @click="dark = !dark">{{
+          dark ? 'Light mode' : 'Dark mode'
+        }}</Button
+        ><Button v-if="auth.isAuthenticated.value" variant="outline" size="sm" @click="signOut"
+          >Sign out</Button
+        >
+      </div>
+      <p v-if="auth.status.value === 'error'" role="alert">
+        Unable to load your account. <a href="/login">Try again</a>
+      </p>
+      <RouterView v-else />
+    </main>
+  </div>
+</template>

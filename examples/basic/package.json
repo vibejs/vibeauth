@@ -1,0 +1,32 @@
+{
+  "name": "vibeauth-basic",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1 --port 5173 --strictPort",
+    "build": "vite build && tsdown --config tsdown.server.config.ts",
+    "start:server": "node --env-file-if-exists=../../.env dist/server/main.js",
+    "migrate": "node --env-file-if-exists=../../.env dist/server/migrate.js",
+    "typecheck": "tsc -b --runExternalCode && tsc --project tsconfig.server.json"
+  },
+  "dependencies": {
+    "@usevibejs/auth": "workspace:*",
+    "@usevibejs/contract": "catalog:",
+    "@usevibejs/form": "catalog:",
+    "@usevibejs/query": "catalog:",
+    "@usevibejs/server": "catalog:",
+    "@usevibejs/ui": "catalog:",
+    "better-auth": "catalog:",
+    "clsx": "catalog:",
+    "tailwind-merge": "catalog:",
+    "valibot": "catalog:"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "catalog:",
+    "@usevibejs/compiler": "catalog:",
+    "@usevibejs/language-tools": "catalog:",
+    "tailwindcss": "catalog:",
+    "typescript": "catalog:ts-next",
+    "vite": "catalog:"
+  }
+}

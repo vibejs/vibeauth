@@ -1,0 +1,115 @@
+@import 'tailwindcss';
+@import './vibecn.css';
+@source './components';
+@source './ui';
+@source '../basic/ui';
+@source '../saas/ui';
+
+body {
+  margin: 0;
+  background: var(--background);
+  color: var(--foreground);
+  font-family: ui-sans-serif, system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+button,
+a,
+input,
+select {
+  -webkit-tap-highlight-color: transparent;
+}
+a {
+  text-underline-offset: 4px;
+}
+.auth-shell {
+  min-height: 100dvh;
+  display: grid;
+  grid-template-columns: minmax(260px, 38%) 1fr;
+}
+.auth-aside {
+  padding: clamp(2rem, 5vw, 5rem);
+  background: var(--muted);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 4rem;
+}
+.auth-content {
+  min-width: 0;
+  max-width: 100%;
+  width: min(100%, 46rem);
+  margin: auto;
+  padding: clamp(1.5rem, 5vw, 5rem);
+}
+.brand {
+  font-weight: 650;
+  letter-spacing: -0.04em;
+  font-size: 1.3rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.brand-mark {
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  font-family: ui-monospace, monospace;
+  font-size: 0.8rem;
+}
+.aside-title {
+  font-size: clamp(2rem, 3vw, 3.4rem);
+  letter-spacing: -0.06em;
+  line-height: 1.08;
+  font-weight: 550;
+}
+.session-line {
+  font:
+    0.7rem ui-monospace,
+    monospace;
+  letter-spacing: 0.04em;
+  color: var(--muted-foreground);
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+.session-line::before {
+  content: '';
+  display: block;
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 50%;
+  background: currentColor;
+}
+@media (max-width: 740px) {
+  .auth-shell {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .auth-aside {
+    border-right: 0;
+    border-bottom: 1px solid var(--border);
+    padding: 1.5rem;
+    gap: 1.5rem;
+  }
+  .aside-title {
+    font-size: 1.7rem;
+    max-width: 20rem;
+  }
+  .aside-footer {
+    display: none;
+  }
+  .auth-content {
+    padding: 2rem 1.5rem;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

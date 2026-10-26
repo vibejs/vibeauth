@@ -1,0 +1,187 @@
+<script setup lang="ts">
+import { ref, watch, onMounted } from '@usevibejs/ui';
+import { useAuth } from '@usevibejs/auth';
+import { useQuery, useQueryClient } from '@usevibejs/query';
+import { createClient } from '@usevibejs/contract';
+import { account } from '../contracts.ts';
+import Button from '../ui/Button.vibe';
+import Input from '../ui/Input.vibe';
+import Field from '../ui/Field.vibe';
+import FieldLabel from '../ui/FieldLabel.vibe';
+
+const auth = useAuth();
+const queryClient = useQueryClient();
+const api = createClient({ account }, { baseUrl: '/api' });
+const profile = useQuery(() => ({
+  queryKey: ['profile', auth.user.value?.id],
+  enabled: auth.isAuthenticated.value,
+  queryFn: async ({ signal }) => {
+    const result = await api.account.profile(undefined, { signal });
+    if (!result.ok) {
+      if (result.error.status === 401) await auth.refreshSession();
+      throw new Error('Profile unavailable.');
+    }
+    return result.data;
+  },
+}));
+const name = ref(auth.user.value?.name ?? '');
+const currentPassword = ref('');
+const newPassword = ref('');
+const message = ref('');
+const busy = ref(false);
+const sessions = ref<
+  { id: string; current: boolean; createdAt: string; expiresAt: string; userAgent: string | null }[]
+>([]);
+watch(
+  () => auth.user.value?.id,
+  () => {
+    void queryClient.cancelQueries();
+    queryClient.clear();
+    sessions.value = [];
+  },
+  { flush: 'sync' },
+);
+async function run(action: () => Promise<boolean>) {
+  busy.value = true;
+  message.value = '';
+  try {
+    message.value = (await action())
+      ? 'Changes saved.'
+      : 'Unable to save. Check your details and try again.';
+  } catch {
+    message.value = 'Unable to connect. Try again.';
+  } finally {
+    busy.value = false;
+    currentPassword.value = '';
+    newPassword.value = '';
+  }
+}
+async function loadSessions() {
+  const result = await api.account.sessions();
+  if (result.ok) sessions.value = result.data;
+}
+async function save() {
+  await run(async () => {
+    const result = await auth.client.updateUser({ name: name.value });
+    await auth.refreshSession();
+    await queryClient.invalidateQueries({ queryKey: ['profile'] });
+    return !result.error;
+  });
+}
+async function password() {
+  await run(async () => {
+    const result = await auth.client.changePassword({
+      currentPassword: currentPassword.value,
+      newPassword: newPassword.value,
+      revokeOtherSessions: true,
+    });
+    await loadSessions();
+    return !result.error;
+  });
+}
+async function revoke(id: string) {
+  await run(async () => {
+    const result = await api.account.revoke({ params: { id } });
+    await loadSessions();
+    await auth.refreshSession();
+    return result.ok;
+  });
+}
+async function revokeOthers() {
+  await run(async () => {
+    const result = await auth.client.revokeOtherSessions();
+    await loadSessions();
+    return !result.error;
+  });
+}
+async function revokeAll() {
+  await run(async () => {
+    const result = await auth.client.revokeSessions();
+    await auth.refreshSession();
+    return !result.error;
+  });
+}
+onMounted(() => {
+  void loadSessions();
+});
+</script>
+
+<template>
+  <div class="grid gap-10">
+    <section class="grid gap-4">
+      <h2 class="text-lg font-semibold">Profile</h2>
+      <p class="text-sm text-muted-foreground">
+        {{ profile.data?.email ?? auth.user.value?.email }}
+      </p>
+      <form class="grid gap-4" @submit.prevent="save">
+        <Field
+          ><FieldLabel for="account-name">Display name</FieldLabel
+          ><Input
+            id="account-name"
+            v-model="name"
+            autocomplete="name"
+            required
+            :maxlength="100" /></Field
+        ><Button type="submit" :disabled="busy">Save profile</Button>
+      </form>
+    </section>
+    <section class="grid gap-4">
+      <h2 class="text-lg font-semibold">Change password</h2>
+      <form class="grid gap-4" @submit.prevent="password">
+        <Field
+          ><FieldLabel for="current-password">Current password</FieldLabel
+          ><Input
+            id="current-password"
+            type="password"
+            v-model="currentPassword"
+            autocomplete="current-password"
+            required /></Field
+        ><Field
+          ><FieldLabel for="new-password">New password</FieldLabel
+          ><Input
+            id="new-password"
+            type="password"
+            v-model="newPassword"
+            autocomplete="new-password"
+            :minlength="12"
+            :maxlength="128"
+            required /></Field
+        ><Button type="submit" :disabled="busy">Change password</Button>
+      </form>
+      <p class="text-sm text-muted-foreground">Other sessions will be signed out.</p>
+    </section>
+    <section class="grid gap-4">
+      <h2 class="text-lg font-semibold">Active sessions</h2>
+      <ul class="divide-y">
+        <li
+          v-for="session in sessions"
+          :key="session.id"
+          class="flex items-center justify-between gap-4 py-4"
+        >
+          <div class="min-w-0 flex-1">
+            <p class="text-sm font-medium">
+              {{ session.current ? 'This device' : 'Other device' }}
+            </p>
+            <p class="max-w-64 truncate text-xs text-muted-foreground">
+              {{ session.userAgent ?? 'Unknown browser' }}
+            </p>
+            <p class="text-xs text-muted-foreground">
+              Expires {{ new Date(session.expiresAt).toLocaleDateString() }}
+            </p>
+          </div>
+          <Button variant="outline" size="sm" :disabled="busy" @click="revoke(session.id)"
+            >Revoke</Button
+          >
+        </li>
+      </ul>
+      <div class="flex flex-wrap gap-2">
+        <Button variant="outline" :disabled="busy" @click="revokeOthers"
+          >Sign out other devices</Button
+        ><Button variant="destructive" :disabled="busy" @click="revokeAll"
+          >Sign out all devices</Button
+        >
+      </div>
+    </section>
+    <p v-if="message" role="status" class="text-sm">{{ message }}</p>
+  </div>
+</template>

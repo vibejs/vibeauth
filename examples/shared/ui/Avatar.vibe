@@ -1,0 +1,32 @@
+<!-- Adapted from shadcn/ui under MIT. See vibecn.LICENSE. -->
+<script setup lang="ts">
+import { provide, ref } from '@usevibejs/ui';
+import type { ClassValue } from '@usevibejs/ui';
+import { cn } from '../lib/utils.ts';
+
+defineOptions({ inheritAttrs: false });
+
+const { class: className, size = 'default' } = defineProps<{
+  class?: ClassValue;
+  size?: 'default' | 'sm' | 'lg';
+}>();
+defineSlots<{ default?: (props: {}) => unknown }>();
+/** AvatarImage reports whether its image loaded; AvatarFallback shows until it has. */
+const status = ref<'loading' | 'loaded' | 'error'>('loading');
+provide(Symbol.for('vibecn.avatar'), status);
+</script>
+
+<template>
+  <span
+    data-slot="avatar"
+    :data-size="size"
+    v-bind="$attrs"
+    :class="
+      cn(
+        'group/avatar relative flex size-8 shrink-0 overflow-hidden rounded-full select-none data-[size=lg]:size-10 data-[size=sm]:size-6',
+        className,
+      )
+    "
+    ><slot
+  /></span>
+</template>

@@ -1,0 +1,7 @@
+<script setup lang="ts">
+import { useUser } from '@usevibejs/auth';
+const user = useUser();
+</script>
+<template>
+  <p data-identity>{{ user?.name ?? 'Guest' }}</p>
+</template>

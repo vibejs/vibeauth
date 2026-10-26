@@ -1,34 +1,43 @@
-import { DatabaseSync } from "node:sqlite";
-import { betterAuth } from "better-auth";
-import { getMigrations } from "better-auth/db/migration";
-import { admin, organization, twoFactor } from "better-auth/plugins";
-import { passkey } from "@better-auth/passkey";
-import { defineContract, get, post } from "@usevibejs/contract";
-import { Controller, Handle, Module, UseGuards, VibeFactory, type Ctx } from "@usevibejs/server";
-import * as v from "valibot";
+// oxlint-disable typescript/no-extraneous-class -- Vibe.js modules are plain classes registered with Module.
+import { DatabaseSync } from 'node:sqlite';
+import { betterAuth } from 'better-auth';
+import { getMigrations } from 'better-auth/db/migration';
+import { admin, organization, twoFactor } from 'better-auth/plugins';
+import { accountController } from '../examples/shared/server.ts';
+import { passkey } from '@better-auth/passkey';
+import { defineContract, get, post } from '@usevibejs/contract';
+import { Controller, Handle, Module, UseGuards, VibeFactory, type Ctx } from '@usevibejs/server';
+import * as v from 'valibot';
 import {
   createAuthGuard,
   createAuthMiddleware,
   getAuthSession,
   requireAuthSession,
-} from "../src/server.ts";
+} from '../src/server.ts';
 
-export const origin = "https://auth.example.test";
+const fixtureOrigin = 'https://auth.example.test';
 export const credentials = {
-  name: "Ada",
-  email: "ada@example.test",
-  password: "Local-test-password-924!",
+  name: 'Ada',
+  email: 'ada@example.test',
+  password: 'Local-test-password-924!',
 };
 
 export async function fixture(
-  options: { verified?: boolean; expiresIn?: number; rateLimit?: number; basePath?: string } = {},
+  options: {
+    verified?: boolean;
+    expiresIn?: number;
+    rateLimit?: number;
+    basePath?: string;
+    origin?: string;
+  } = {},
 ) {
-  const database = new DatabaseSync(":memory:");
-  const mail: { kind: "verify" | "reset" | "invite"; url: string; email: string }[] = [];
+  const origin = options.origin ?? fixtureOrigin;
+  const database = new DatabaseSync(':memory:');
+  const mail: { kind: 'verify' | 'reset' | 'invite'; url: string; email: string }[] = [];
   const auth = betterAuth({
     baseURL: origin,
-    basePath: options.basePath ?? "/api/auth",
-    secret: "deterministic-test-secret-at-least-thirty-two-characters",
+    basePath: options.basePath ?? '/api/auth',
+    secret: 'deterministic-test-secret-at-least-thirty-two-characters',
     database,
     trustedOrigins: [origin],
     logger: { disabled: true },
@@ -38,47 +47,51 @@ export async function fixture(
       requireEmailVerification: options.verified ?? false,
       revokeSessionsOnPasswordReset: true,
       sendResetPassword: async ({ user, url }) => {
-        mail.push({ kind: "reset", url, email: user.email });
+        mail.push({ kind: 'reset', url, email: user.email });
       },
     },
     emailVerification: {
       sendOnSignUp: true,
       sendVerificationEmail: async ({ user, url }) => {
-        mail.push({ kind: "verify", url, email: user.email });
+        mail.push({ kind: 'verify', url, email: user.email });
       },
     },
     session: { expiresIn: options.expiresIn ?? 3600, cookieCache: { enabled: true, maxAge: 300 } },
     rateLimit: {
       enabled: true,
-      storage: "database",
+      storage: 'database',
       window: 60,
       max: options.rateLimit ?? 1000,
-      customRules: { "/sign-in/email": { window: 60, max: options.rateLimit ?? 1000 } },
+      customRules: { '/sign-in/email': { window: 60, max: options.rateLimit ?? 1000 } },
     },
-    advanced: { useSecureCookies: true, disableOriginCheck: false, disableCSRFCheck: false },
+    advanced: {
+      useSecureCookies: origin.startsWith('https:'),
+      disableOriginCheck: false,
+      disableCSRFCheck: false,
+    },
     socialProviders: {
-      github: { clientId: "local-placeholder", clientSecret: "local-placeholder" },
+      github: { clientId: 'local-placeholder', clientSecret: 'local-placeholder' },
     },
     plugins: [
       admin(),
       organization({
         sendInvitationEmail: async (data) => {
-          mail.push({ kind: "invite", url: data.id, email: data.email });
+          mail.push({ kind: 'invite', url: data.id, email: data.email });
         },
       }),
-      twoFactor({ issuer: "VibeAuth test" }),
-      passkey({ rpID: "auth.example.test", rpName: "VibeAuth test", origin }),
+      twoFactor({ issuer: 'VibeAuth test' }),
+      passkey({ rpID: new URL(origin).hostname, rpName: 'VibeAuth test', origin }),
     ],
   });
   await (await getMigrations(auth.options)).runMigrations();
-  const routes = defineContract("/private", {
-    profile: get("/profile", {
+  const routes = defineContract('/private', {
+    profile: get('/profile', {
       response: v.object({ id: v.string(), name: v.string() }),
       errors: { UNAUTHORIZED: 401, FORBIDDEN: 403 },
     }),
-    optional: get("/optional", { response: v.boolean() }),
-    verified: get("/verified", { response: v.boolean() }),
-    owner: post("/:id", { response: v.boolean() }),
+    optional: get('/optional', { response: v.boolean() }),
+    verified: get('/verified', { response: v.boolean() }),
+    owner: post('/:id', { response: v.boolean() }),
   });
   const Guard = createAuthGuard(auth);
   const Verified = createAuthGuard(auth, { verifiedEmail: true });
@@ -92,7 +105,7 @@ export async function fixture(
     @Handle(routes.profile)
     async profile(ctx: Ctx<typeof routes.profile>) {
       const identity = await requireAuthSession(auth, ctx);
-      if ("token" in identity.session) throw new Error("Session credential leaked");
+      if ('token' in identity.session) throw new Error('Session credential leaked');
       return { id: identity.userId, name: identity.user.name };
     }
     @UseGuards(Optional)
@@ -111,17 +124,17 @@ export async function fixture(
       return true;
     }
   }
-  @Module({ controllers: [ProtectedController] })
+  @Module({ controllers: [ProtectedController, accountController(auth, [origin])] })
   class AppModule {}
   const app = await VibeFactory.create(AppModule, {
-    basePath: "/api",
+    basePath: '/api',
     middleware: [createAuthMiddleware(auth)],
   });
   const request = async (
     path: string,
     body?: unknown,
-    cookie = "",
-    method = body === undefined ? "GET" : "POST",
+    cookie = '',
+    method = body === undefined ? 'GET' : 'POST',
     extra: Record<string, string> = {},
   ) =>
     app.fetch(
@@ -130,7 +143,7 @@ export async function fixture(
         headers: {
           origin,
           ...(cookie ? { cookie } : {}),
-          ...(body === undefined ? {} : { "content-type": "application/json" }),
+          ...(body === undefined ? {} : { 'content-type': 'application/json' }),
           ...extra,
         },
         ...(body === undefined ? {} : { body: JSON.stringify(body) }),
@@ -153,6 +166,8 @@ export async function fixture(
 export function cookies(response: Response): string {
   return response.headers
     .getSetCookie()
-    .map((value) => value.split(";")[0])
-    .join("; ");
+    .map((value) => value.split(';')[0])
+    .join('; ');
 }
+
+export { fixtureOrigin as origin };

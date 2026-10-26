@@ -7,7 +7,7 @@ import {
   shallowRef,
   watch,
   type ComputedRef,
-} from "@usevibejs/ui";
+} from '@usevibejs/ui';
 import {
   createAuthClient,
   type AuthClient,
@@ -15,18 +15,18 @@ import {
   type Atom,
   type BetterFetchError,
   type SessionQueryParams,
-} from "better-auth/client";
+} from 'better-auth/client';
 import {
   sanitizeSession,
   type AuthStatus,
   type SafeSession,
   type SessionData,
-} from "../shared/types.ts";
+} from '../shared/types.ts';
 
 export interface AuthState<S extends SessionData> {
   readonly data: ComputedRef<SafeSession<S> | null>;
-  readonly session: ComputedRef<SafeSession<S>["session"] | null>;
-  readonly user: ComputedRef<S["user"] | null>;
+  readonly session: ComputedRef<SafeSession<S>['session'] | null>;
+  readonly user: ComputedRef<S['user'] | null>;
   readonly status: ComputedRef<AuthStatus>;
   readonly isAuthenticated: ComputedRef<boolean>;
   readonly isPending: ComputedRef<boolean>;
@@ -39,7 +39,7 @@ export interface AuthState<S extends SessionData> {
   ready(): Promise<void>;
 }
 
-export type ClientSession<O extends BetterAuthClientOptions> = AuthClient<O>["$Infer"]["Session"] &
+export type ClientSession<O extends BetterAuthClientOptions> = AuthClient<O>['$Infer']['Session'] &
   SessionData;
 export type VibeAuthClient<O extends BetterAuthClientOptions = {}> = AuthState<ClientSession<O>> & {
   /** The unmodified Better Auth client, including every inferred plugin action. */
@@ -65,15 +65,15 @@ export function createVibeAuthClient<const O extends BetterAuthClientOptions = {
   const snapshot = shallowRef(atom.get());
   const expired = ref(false);
   let mounts = 0;
-  let stop: (() => void) | undefined;
+  let stop: () => void;
 
   const status = computed<AuthStatus>(() => {
     const state = snapshot.value;
-    if (expired.value) return "expired";
-    if (state.error) return "error";
-    if (state.isPending) return "loading";
-    if (state.isRefetching) return "refreshing";
-    return state.data ? "authenticated" : "unauthenticated";
+    if (expired.value) return 'expired';
+    if (state.error) return 'error';
+    if (state.isPending) return 'loading';
+    if (state.isRefetching) return 'refreshing';
+    return state.data ? 'authenticated' : 'unauthenticated';
   });
   const data = computed(() => {
     const state = snapshot.value;
@@ -121,7 +121,7 @@ export function createVibeAuthClient<const O extends BetterAuthClientOptions = {
               schedule();
               cleanup(() => clearTimeout(timer));
             },
-            { immediate: true, flush: "sync" },
+            { immediate: true, flush: 'sync' },
           );
         });
         stop = () => scope.stop();
@@ -131,8 +131,7 @@ export function createVibeAuthClient<const O extends BetterAuthClientOptions = {
         if (!active) return;
         active = false;
         if (--mounts === 0) {
-          stop?.();
-          stop = undefined;
+          stop();
         }
       };
     },
@@ -155,7 +154,7 @@ export function createVibeAuthClient<const O extends BetterAuthClientOptions = {
             resolve();
           });
           // Vanilla's automatic mount fetch is browser-only.
-          if (typeof window === "undefined") void atom.get().refetch();
+          if (typeof window === 'undefined') void atom.get().refetch();
         });
       } finally {
         release();
@@ -163,7 +162,7 @@ export function createVibeAuthClient<const O extends BetterAuthClientOptions = {
     },
     useAuth() {
       if (!getCurrentScope())
-        throw new Error("VIBEAUTH_SCOPE: useAuth requires a component setup or effect scope.");
+        throw new Error('VIBEAUTH_SCOPE: useAuth requires a component setup or effect scope.');
       onScopeDispose(auth.mount());
       return auth;
     },

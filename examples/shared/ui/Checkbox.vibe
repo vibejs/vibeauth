@@ -1,0 +1,58 @@
+<!-- Adapted from shadcn/ui under MIT. See vibecn.LICENSE. -->
+<script setup lang="ts">
+import { onMounted, useTemplateRef, watch } from '@usevibejs/ui';
+import type { ClassValue } from '@usevibejs/ui';
+import { cn } from '../lib/utils.ts';
+
+defineOptions({ inheritAttrs: false });
+
+const {
+  class: className,
+  indeterminate = false,
+  name,
+  value,
+  disabled,
+  required,
+} = defineProps<{
+  class?: ClassValue;
+  /** Shows a dash for a partly checked group. A click checks or clears the box as usual. */
+  indeterminate?: boolean;
+  name?: string;
+  value?: string;
+  disabled?: boolean;
+  required?: boolean;
+}>();
+const model = defineModel<boolean>({ default: () => false });
+const input = useTemplateRef<HTMLInputElement>('input');
+defineExpose({ focus: () => input.value?.focus() });
+
+// `indeterminate` is a DOM property without an attribute. A click clears it, so it is set again
+// whenever the model changes while the prop is still set.
+const apply = (): void => {
+  if (input.value) input.value.indeterminate = indeterminate;
+};
+onMounted(apply);
+watch([() => indeterminate, model], apply, { flush: 'post' });
+</script>
+
+<template>
+  <input
+    ref="input"
+    type="checkbox"
+    data-slot="checkbox"
+    :data-state="indeterminate ? 'indeterminate' : model ? 'checked' : 'unchecked'"
+    :checked="model"
+    :name="name"
+    :value="value"
+    :disabled="disabled"
+    :required="required"
+    v-bind="$attrs"
+    :class="
+      cn(
+        'peer inline-grid size-4 shrink-0 cursor-default appearance-none place-content-center rounded-[4px] border border-input text-primary-foreground shadow-xs transition-shadow outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:cursor-not-allowed disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:bg-input/30 dark:aria-invalid:ring-destructive/40 checked:border-primary checked:bg-primary dark:checked:bg-primary indeterminate:border-primary indeterminate:bg-primary dark:indeterminate:bg-primary before:hidden before:h-2.5 before:w-1.5 before:-translate-y-px before:rotate-45 before:border-r-2 before:border-b-2 before:border-current checked:before:block indeterminate:before:block indeterminate:before:h-0 indeterminate:before:w-2 indeterminate:before:translate-y-0 indeterminate:before:rotate-0 indeterminate:before:border-r-0',
+        className,
+      )
+    "
+    @change="model = ($event.target as HTMLInputElement).checked"
+  />
+</template>

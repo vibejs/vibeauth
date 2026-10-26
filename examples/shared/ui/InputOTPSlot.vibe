@@ -1,0 +1,37 @@
+<!-- Adapted from shadcn/ui under MIT. See vibecn.LICENSE. -->
+<script setup lang="ts">
+import { computed, inject } from '@usevibejs/ui';
+import type { ClassValue, Ref } from '@usevibejs/ui';
+import { cn } from '../lib/utils.ts';
+
+defineOptions({ inheritAttrs: false });
+
+const { class: className, index } = defineProps<{ class?: ClassValue; index: number }>();
+const otp = inject<{ model: Ref<string>; active: (index: number) => boolean; caret: Ref<boolean> }>(
+  Symbol.for('vibecn.input-otp'),
+)!;
+const character = computed(() => otp.model.value[index] ?? '');
+</script>
+
+<template>
+  <div
+    aria-hidden="true"
+    data-slot="input-otp-slot"
+    :data-active="otp.active(index)"
+    v-bind="$attrs"
+    :class="
+      cn(
+        'relative flex h-9 w-9 items-center justify-center border-y border-r border-input text-sm shadow-xs transition-all outline-none first:rounded-l-md first:border-l last:rounded-r-md aria-invalid:border-destructive data-[active=true]:z-10 data-[active=true]:border-ring data-[active=true]:ring-[3px] data-[active=true]:ring-ring/50 data-[active=true]:aria-invalid:border-destructive data-[active=true]:aria-invalid:ring-destructive/20 dark:bg-input/30 dark:data-[active=true]:aria-invalid:ring-destructive/40',
+        className,
+      )
+    "
+  >
+    {{ character }}
+    <div
+      v-if="otp.active(index) && otp.caret.value && !character"
+      class="pointer-events-none absolute inset-0 flex items-center justify-center"
+    >
+      <div class="h-4 w-px animate-pulse bg-foreground motion-reduce:animate-none" />
+    </div>
+  </div>
+</template>

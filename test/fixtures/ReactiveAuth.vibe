@@ -1,0 +1,24 @@
+<script setup lang="ts">
+import { useAuth, useUser, useSession, useAuthStatus } from '@usevibejs/auth';
+import Credentials from '../../examples/shared/components/Credentials.vibe';
+const auth = useAuth();
+const user = useUser();
+const session = useSession();
+const status = useAuthStatus();
+async function logout() {
+  await auth.client.signOut();
+  await auth.refreshSession();
+}
+</script>
+<template>
+  <div>
+    <p data-status>{{ status }}</p>
+    <p v-if="status === 'loading'">Loading your account</p>
+    <div v-else-if="user">
+      <p data-identity>{{ user.name }}</p>
+      <p data-session>{{ session?.id }}</p>
+      <button @click="logout">Sign out</button>
+    </div>
+    <Credentials v-else />
+  </div>
+</template>
